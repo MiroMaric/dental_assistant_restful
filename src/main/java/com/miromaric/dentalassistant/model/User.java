@@ -1,11 +1,16 @@
-package com.miromaric.dentalassistant.domain;
+package com.miromaric.dentalassistant.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author MikoPC
  */
+@Entity
 public class User {
 
+    @Id
     private String username;
     private String password;
     private String firstname;
