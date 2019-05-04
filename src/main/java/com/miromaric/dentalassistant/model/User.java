@@ -7,7 +7,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -15,9 +14,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    @NamedQuery(name = "User.getAll", query = "SELECT u FROM User u")
     ,
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    @NamedQuery(name = "User.getByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 })
 public class User {
 
