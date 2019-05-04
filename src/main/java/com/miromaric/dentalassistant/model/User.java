@@ -1,28 +1,50 @@
 package com.miromaric.dentalassistant.model;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author MikoPC
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    ,
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+})
 public class User {
 
     @Id
+    @Pattern(regexp = "^((\\w){4,20})$",message = "Korisničko ime mora imati 4 - 20 karaktera")
     private String username;
+    @NotNull
+    @Pattern(regexp = "^((\\w){6,20})$",message = "Šifra mora imati 6-20 karaktera")
     private String password;
-    private String firstname;
-    private String lastname;
+    @NotNull
+    @Pattern(regexp = "^(([a-zA-Z\\d_\\.-]+)@([a-z\\d-]+)\\.([a-z]{2,8})(\\.[a-z]{2,8})?)$",message = "E-pošta mora biti valida, e.g. me@mydomain.com")
     private String email;
+    @NotNull
+    @Pattern(regexp = "^(([A-Za-z]){2,15})$",message = "Ime mora imati 2 - 15 karaktera")
+    private String firstname;
+    @NotNull
+    @Pattern(regexp = "^(([A-Za-z]){2,15})$",message = "Prezime mora imati 2 - 15 karaktera")
+    private String lastname;
+    @Pattern(regexp = "^(([\\w, ]){4,20})$",message = "Adresa mora imati 4 - 20 karaktera")
     private String address;
+    @Pattern(regexp = "^((\\d){7,10})$",message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;
 
     public User() {
     }
 
-    public User(String username, String password, String firstname, String lastname, String email, String address, String phone) {
+    public User(String username, String password, String email, String firstname, String lastname, String address, String phone) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -86,6 +108,36 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "username=" + username + '}';
     }
 
 }
