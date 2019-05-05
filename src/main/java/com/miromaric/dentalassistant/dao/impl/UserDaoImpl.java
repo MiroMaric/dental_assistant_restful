@@ -28,7 +28,13 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getOne(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HerokuDentalAssistantPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User user = (User)em.createNamedQuery("User.getByUsername").setParameter("username", username).getSingleResult();
+        em.close();
+        emf.close();
+        return user;
     }
 
     @Override
