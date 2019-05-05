@@ -35,7 +35,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User uUser = dao.update(user);
+        if(uUser==null)
+            throw new ResourceNotFoundException("Resource not found");
+        return uUser;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
             em.getTransaction().commit();
         }
         em.close();
-        return dbUser==null?true:false;
+        return dbUser==null;
     }
 
     @Override
@@ -46,7 +46,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User uUser = em.find(User.class, user.getUsername());
+        if(uUser!=null){
+            em.merge(user);
+            em.getTransaction().commit();
+        }
+        em.close();
+        return uUser;
     }
 
     @Override
@@ -60,7 +69,7 @@ public class UserDaoImpl implements UserDao {
             em.getTransaction().commit();
         }
         em.close();
-        return user!=null?user:null;
+        return user;
     }
 
 }
