@@ -7,12 +7,20 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
     @Override
-    public void save(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean save(User user) {
+        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User dbUser = em.find(User.class, user.getUsername());
+        if (dbUser == null) {
+            em.persist(user);
+            em.getTransaction().commit();
+        }
+        em.close();
+        return dbUser==null?true:false;
     }
 
     @Override
@@ -26,11 +34,11 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User getOne(String username) {
+    public User getOne(String username){
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        User user = (User)em.createNamedQuery("User.getByUsername").setParameter("username", username).getSingleResult();
+        User user = em.find(User.class, username);      
         em.close();
         return user;
     }
@@ -44,5 +52,5 @@ public class UserDaoImpl implements UserDao{
     public void remove(String username) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -1,8 +1,10 @@
 package com.miromaric.dentalassistant;
 
-import com.miromaric.dentalassistant.dao.UserDao;
-import com.miromaric.dentalassistant.dao.impl.UserDaoImpl;
 import com.miromaric.dentalassistant.model.User;
+import com.miromaric.dentalassistant.myresponse.MyResponse;
+import com.miromaric.dentalassistant.myresponse.Status;
+import com.miromaric.dentalassistant.service.UserService;
+import com.miromaric.dentalassistant.service.impl.UserServiceImpl;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,20 +21,29 @@ import javax.ws.rs.core.MediaType;
 @Path("users")
 public class UserResource {
     
-    UserDao userDao = new UserDaoImpl();
+    UserService service = new UserServiceImpl();
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getAll(){
-        return userDao.getAll();
+    public MyResponse getAll(){
+        List<User> users =  service.getAll();
+        return new MyResponse(Status.SUCCESS, users, null);
     }
     
     @GET
     @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getOne(@PathParam("username")String username){
-        return userDao.getOne(username);
+    public MyResponse getOne(@PathParam("username")String username){
+        User user =  service.getOne(username);
+        return new MyResponse(Status.SUCCESS, user, null);
     }
-
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public MyResponse save(User user){
+        service.save(user);
+        return new MyResponse(Status.SUCCESS, user, null);
+    }
     
 }
