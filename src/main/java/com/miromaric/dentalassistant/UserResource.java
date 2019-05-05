@@ -19,10 +19,11 @@ import javax.ws.rs.core.MediaType;
 @Path("users")
 public class UserResource {
     
+    UserDao userDao = new UserDaoImpl();
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAll(){
-        UserDao userDao = new UserDaoImpl();
         return userDao.getAll();
     }
     
@@ -30,8 +31,8 @@ public class UserResource {
     @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getOne(@PathParam("username")String username){
-        UserDao userDao = new UserDaoImpl();
         return userDao.getOne(username);
     }
+
     
 }

@@ -2,10 +2,10 @@ package com.miromaric.dentalassistant.dao.impl;
 
 import com.miromaric.dentalassistant.dao.UserDao;
 import com.miromaric.dentalassistant.model.User;
+import com.miromaric.dentalassistant.persistence.MyPersistence;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 
 public class UserDaoImpl implements UserDao{
@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> getAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HerokuDentalAssistantPU");
+        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         List<User> users = em.createNamedQuery("User.getAll").getResultList();
@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getOne(String username) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HerokuDentalAssistantPU");
+        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         User user = (User)em.createNamedQuery("User.getByUsername").setParameter("username", username).getSingleResult();
