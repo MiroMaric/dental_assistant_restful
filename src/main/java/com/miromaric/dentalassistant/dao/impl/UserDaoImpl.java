@@ -1,6 +1,7 @@
 package com.miromaric.dentalassistant.dao.impl;
 
 import com.miromaric.dentalassistant.dao.UserDao;
+import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.User;
 import com.miromaric.dentalassistant.persistence.MyPersistence;
 import java.util.List;
@@ -44,13 +45,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user) {
+    public User update(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User remove(String username) {
+        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User user = em.find(User.class, username);
+        if(user!=null){
+            em.remove(user);
+            em.getTransaction().commit();
+        }
+        em.close();
+        return user!=null?user:null;
     }
 
 }

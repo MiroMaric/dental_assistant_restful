@@ -34,13 +34,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) {
+    public User update(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User remove(String username) {
+        User user = dao.remove(username);
+        if(user==null)
+            throw new ResourceNotFoundException("Resource not found");
+        return user;
     }
 
 }
