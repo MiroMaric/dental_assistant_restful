@@ -7,6 +7,7 @@ import com.miromaric.dentalassistant.service.UserService;
 import com.miromaric.dentalassistant.service.impl.UserServiceImpl;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,6 +44,14 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public MyResponse save(User user){
         service.save(user);
+        return new MyResponse(Status.SUCCESS, user, null);
+    }
+    
+    @DELETE
+    @Path("{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MyResponse remove(@PathParam("username")String username){
+        User user = service.remove(username);
         return new MyResponse(Status.SUCCESS, user, null);
     }
     
