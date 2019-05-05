@@ -22,7 +22,6 @@ public class UserDaoImpl implements UserDao{
         em.getTransaction().begin();
         List<User> users = em.createNamedQuery("User.getAll").getResultList();
         em.close();
-        emf.close();
         return users;
     }
 
@@ -33,7 +32,6 @@ public class UserDaoImpl implements UserDao{
         em.getTransaction().begin();
         User user = (User)em.createNamedQuery("User.getByUsername").setParameter("username", username).getSingleResult();
         em.close();
-        emf.close();
         return user;
     }
 
