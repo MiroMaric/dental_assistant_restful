@@ -1,43 +1,55 @@
 package com.miromaric.dentalassistant.model;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author MikoPC
  */
 @Entity
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.getAll", query = "SELECT u FROM User u")
     ,
     @NamedQuery(name = "User.getByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 })
-public class User {
+public class User implements Serializable{
 
     @Id
+    @Basic(optional = false)
+    @Column(nullable = false,length = 20)
     @Pattern(regexp = "^((\\w){4,20})$",message = "Korisničko ime mora imati 4 - 20 karaktera")
     private String username;
-    @NotNull
+    @Basic(optional = false)
+    @Column(nullable = false,length = 20)
     @Pattern(regexp = "^((\\w){6,20})$",message = "Šifra mora imati 6-20 karaktera")
     private String password;
-    @NotNull
+    @Basic(optional = false)
+    @Column(nullable = false)
     @Pattern(regexp = "^(([a-zA-Z\\d_\\.-]+)@([a-z\\d-]+)\\.([a-z]{2,8})(\\.[a-z]{2,8})?)$",message = "E-pošta mora biti valida, e.g. me@mydomain.com")
     private String email;
-    @NotNull
+    @Basic(optional = false)
+    @Column(nullable = false,length = 15)
     @Pattern(regexp = "^(([A-Za-z]){2,15})$",message = "Ime mora imati 2 - 15 karaktera")
     private String firstname;
-    @NotNull
+    @Basic(optional = false)
+    @Column(nullable = false,length = 15)
     @Pattern(regexp = "^(([A-Za-z]){2,15})$",message = "Prezime mora imati 2 - 15 karaktera")
     private String lastname;
+    @Column(length = 20)
     @Pattern(regexp = "^(([\\w, ]){4,20})$",message = "Adresa mora imati 4 - 20 karaktera")
     private String address;
-    @Pattern(regexp = "^((\\d){7,10})$",message = "Telefon mora biti unet u ispravnom formatu")
+    @Column(length = 15)
+    @Pattern(regexp = "^((\\d){7,15})$",message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;
 
     public User() {
