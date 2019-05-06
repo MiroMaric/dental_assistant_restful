@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
@@ -20,6 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p")
+    ,
+    @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient u WHERE p.id = :id")
+})
 public class Patient implements Serializable {
 
     @Id
