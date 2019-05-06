@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
-        User uUser = dao.update(user);
+    public User update(String username,User user) {
+        User uUser = dao.update(username,user);
         if(uUser==null)
             throw new ResourceNotFoundException("Resource not found");
         return uUser;

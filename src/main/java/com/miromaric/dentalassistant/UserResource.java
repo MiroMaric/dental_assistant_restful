@@ -59,8 +59,9 @@ public class UserResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse update(User user){
-        User uUser = service.update(user);
+    @Path("{username}")
+    public MyResponse update(@PathParam("username")String username,User user){
+        User uUser = service.update(username,user);
         return new MyResponse(Status.SUCCESS, uUser, null);
     }
     

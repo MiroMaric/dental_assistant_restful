@@ -45,11 +45,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User update(User user) {
+    public User update(String username,User user) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        User uUser = em.find(User.class, user.getUsername());
+        User uUser = em.find(User.class, username);
         if(uUser!=null){
             em.merge(user);
             em.getTransaction().commit();
