@@ -3,6 +3,7 @@
   <persistence-unit name="HerokuDentalAssistantPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>com.miromaric.dentalassistant.model.User</class>
+    <class>com.miromaric.dentalassistant.model.Patient</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_bb2ba77dbf768d3?zeroDateTimeBehavior=convertToNull"/>
@@ -10,7 +11,7 @@
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="a6923d5d"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="javax.persistence.schema-generation.database.action" value="none"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
   <!--com.miromaric_DentalAssistant-RESTfulWebService_war_1.0-SNAPSHOTPU-->
