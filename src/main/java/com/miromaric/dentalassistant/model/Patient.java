@@ -1,8 +1,11 @@
 package com.miromaric.dentalassistant.model;
 
+import com.miromaric.dentalassistant.deserializer.MyJsonDateDeserializer;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbTypeDeserializer;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,25 +17,24 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.yasson.internal.serializer.DateTypeDeserializer;
 
 /**
  *
  * @author MikoPC
  */
 @Entity
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p")
     ,
-    @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient u WHERE p.id = :id")
+    @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient p WHERE p.id = :id")
 })
 public class Patient implements Serializable {
 
     @Id
     @Column(nullable = false)
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientID;
     @Column(nullable = false,length = 15)
     @Basic(optional = false)
@@ -51,10 +53,14 @@ public class Patient implements Serializable {
     @Pattern(regexp = "^((\\d){7,15})$", message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;
     @Temporal(TemporalType.DATE)
+    @JsonbDateFormat(value = "yyyy-MM-dd")
+    @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     private Date birthDate;
     @Column(nullable = false)
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
+    @JsonbDateFormat(value = "yyyy-MM-dd")
+    @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     private Date cardboardDate;
     @Column(nullable = false)
     @Basic(optional = false)
@@ -65,6 +71,17 @@ public class Patient implements Serializable {
 
     public Patient(int patientID, String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated) {
         this.patientID = patientID;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.cardboardDate = cardboardDate;
+        this.deactivated = deactivated;
+    }
+    
+    public Patient(String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
