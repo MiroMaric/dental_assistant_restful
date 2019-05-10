@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,6 +24,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @IdClass(AppointmentPK.class)
+@NamedQueries({
+    @NamedQuery(name = "Appointment.getAll", query = "SELECT a FROM Appointment a")
+})
 public class Appointment implements Serializable {
     @Id
     @Basic(optional = false)
