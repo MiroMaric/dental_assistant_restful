@@ -28,9 +28,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Appointment.getAll", query = "SELECT a FROM Appointment a")
 })
 public class Appointment implements Serializable {
+    /*
+    Problem za generesinjem tabele u bazi zbog @GenerateValue!
+    */
     @Id
-    @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appointmentID;
     @Id
     @Basic(optional = false)
@@ -55,7 +56,7 @@ public class Appointment implements Serializable {
     public Appointment() {
     }
 
-    public Appointment(int appointmentID, User user, Patient patient, Date startTime, Date endTime, String description) {
+    public Appointment(int appointmentID,User user, Patient patient, Date startTime, Date endTime, String description) {
         this.appointmentID = appointmentID;
         this.user = user;
         this.patient = patient;
@@ -63,6 +64,14 @@ public class Appointment implements Serializable {
         this.endTime = endTime;
         this.description = description;
     }
+    public Appointment(User user, Patient patient, Date startTime, Date endTime, String description) {
+        this.user = user;
+        this.patient = patient;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
+    }
+    
 
     public int getAppointmentID() {
         return appointmentID;

@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author MikoPC
  */
 public class AppointmentPK implements Serializable {
-    private int appointmentID;
+    public int appointmentID;
     private Patient patient;
     private User user;
 
@@ -22,7 +22,13 @@ public class AppointmentPK implements Serializable {
         this.patient = patient;
         this.user = user;
     }
-
+    
+    public AppointmentPK(Patient patient, User user) {
+        this.patient = patient;
+        this.user = user;
+    }
+    
+    
     public int getAppointmentID() {
         return appointmentID;
     }

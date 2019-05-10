@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
 @Path("patients")
 public class PatientResource {
     
-    PatientService service = new PatientServiceImpl();
+    private PatientService service = new PatientServiceImpl();
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
