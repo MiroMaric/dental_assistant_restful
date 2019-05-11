@@ -68,6 +68,10 @@ public class Patient implements Serializable {
 
     public Patient() {
     }
+    
+    public Patient(int patientID) {
+        this.patientID = patientID;
+    }
 
     public Patient(int patientID, String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated) {
         this.patientID = patientID;

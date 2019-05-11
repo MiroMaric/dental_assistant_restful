@@ -25,7 +25,8 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(AppointmentPK.class)
 @NamedQueries({
-    @NamedQuery(name = "Appointment.getAll", query = "SELECT a FROM Appointment a")
+    @NamedQuery(name = "Appointment.getAll", query = "SELECT a FROM Appointment a"),
+    @NamedQuery(name = "Appointment.getById", query = "SELECT a FROM Appointment a WHERE a.appointmentID = :appointmentID")
 })
 public class Appointment implements Serializable {
     /*
