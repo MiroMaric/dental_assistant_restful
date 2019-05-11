@@ -9,7 +9,7 @@ import java.util.List;
  * @author MikoPC
  */
 public interface AppointmentDao {
-    void save(Appointment appointment);
+    boolean save(Appointment appointment);
     List<Appointment> getAll();
     Appointment getOne(int id);
     Appointment update(int id,Appointment appointment);
