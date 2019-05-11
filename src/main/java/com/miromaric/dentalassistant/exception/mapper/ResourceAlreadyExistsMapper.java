@@ -17,7 +17,7 @@ public class ResourceAlreadyExistsMapper implements ExceptionMapper<ResourceAlre
 
     @Override
     public Response toResponse(ResourceAlreadyExistsException e) {
-        MyResponse response = new MyResponse(Status.ERROR, null, "Resource Already Exists");
+        MyResponse response = new MyResponse(Status.ERROR, null, e.getMessage());
         return Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).entity(response).build();
     }
     

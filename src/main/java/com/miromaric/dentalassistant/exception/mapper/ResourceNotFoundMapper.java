@@ -17,7 +17,7 @@ public class ResourceNotFoundMapper implements ExceptionMapper<ResourceNotFoundE
 
     @Override
     public Response toResponse(ResourceNotFoundException e) {
-        MyResponse response = new MyResponse(Status.ERROR, null, "Resource not found");
+        MyResponse response = new MyResponse(Status.ERROR, null, e.getMessage());
         return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON).entity(response).build();
     }
     
