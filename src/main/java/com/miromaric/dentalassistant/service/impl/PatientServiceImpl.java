@@ -30,7 +30,7 @@ public class PatientServiceImpl implements PatientService{
         Patient patient = dao.getOne(id);
         if(patient!=null)
             return patient;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Patient not found");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PatientServiceImpl implements PatientService{
         Patient dbPatient = dao.update(id, patient);
         if(dbPatient!=null)
             return dbPatient;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Patient not found");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class PatientServiceImpl implements PatientService{
         Patient patient = dao.remove(id);
         if(patient!=null)
             return patient;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Patient not found");
     }
     
 }

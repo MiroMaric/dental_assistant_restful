@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         if(!dao.save(user)){
-            throw new ResourceAlreadyExistsException("Resource already exists");
+            throw new ResourceAlreadyExistsException("User with this id already exists");
         }
     }
 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public User update(String username,User user) {
         User uUser = dao.update(username,user);
         if(uUser==null)
-            throw new ResourceNotFoundException("Resource not found");
+            throw new ResourceNotFoundException("User not found");
         return uUser;
     }
 
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public User remove(String username) {
         User user = dao.remove(username);
         if(user==null)
-            throw new ResourceNotFoundException("Resource not found");
+            throw new ResourceNotFoundException("User not found");
         return user;
     }
 

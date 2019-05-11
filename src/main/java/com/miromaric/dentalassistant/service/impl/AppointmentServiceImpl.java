@@ -17,7 +17,8 @@ public class AppointmentServiceImpl implements AppointmentService{
     
     @Override
     public void save(Appointment appointment) {
-        dao.save(appointment);
+        if(!dao.save(appointment))
+            throw new ResourceNotFoundException("Patient or/and User not found");
     }
 
     @Override
@@ -30,7 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         Appointment appointment = dao.getOne(id);
         if(appointment!=null)
             return appointment;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Appointment not found");
     }
 
     @Override
@@ -38,7 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         Appointment uAppointment = dao.update(id,appointment);
         if(uAppointment!=null)
             return uAppointment;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Appointment not found");
     }
 
     @Override
@@ -46,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         Appointment appointment = dao.remove(id);
         if(appointment!=null)
             return appointment;
-        throw new ResourceNotFoundException("Resource not found");
+        throw new ResourceNotFoundException("Appointment not found");
     }
     
 }
