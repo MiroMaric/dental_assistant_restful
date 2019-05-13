@@ -6,6 +6,7 @@ import com.miromaric.dentalassistant.myresponse.Status;
 import com.miromaric.dentalassistant.service.PatientService;
 import com.miromaric.dentalassistant.service.impl.PatientServiceImpl;
 import java.util.List;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 @Path("patients")
 public class PatientResource {
     
-    private PatientService service = new PatientServiceImpl();
+    private final PatientService service = new PatientServiceImpl();
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -43,7 +44,7 @@ public class PatientResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse save(Patient patient){
+    public MyResponse save(@Valid Patient patient){
         service.save(patient);
         return new MyResponse(Status.SUCCESS, patient, null);
     }
@@ -60,7 +61,7 @@ public class PatientResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse update(@PathParam("id")int id,Patient patient){
+    public MyResponse update(@PathParam("id")int id,@Valid Patient patient){
         Patient uPatient = service.update(id,patient);
         return new MyResponse(Status.SUCCESS, uPatient, null);
     }

@@ -16,7 +16,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.eclipse.yasson.internal.serializer.DateTypeDeserializer;
 
 /**
@@ -38,19 +41,21 @@ public class Patient implements Serializable {
     private int patientID;
     @Column(nullable = false,length = 15)
     @Basic(optional = false)
-    @Pattern(regexp = "^(([A-Za-z]){2,15})$", message = "Ime mora imati 2 - 15 karaktera")
+    @NotNull(message = "Ime je obavezno")
+    @Size(min=2,max=15,message = "Ime mora imati 2 - 15 karaktera")
     private String firstname;
     @Column(nullable = false,length = 15)
     @Basic(optional = false)
-    @Pattern(regexp = "^(([A-Za-z]){2,15})$", message = "Prezime mora imati 2 - 15 karaktera")
+    @Size(min=2,max=15,message = "Prezime mora imati 2 - 15 karaktera")
+    @NotNull(message = "Prezime je obavezno")
     private String lastname;
-    @Pattern(regexp = "^(([a-zA-Z\\d_\\.-]+)@([a-z\\d-]+)\\.([a-z]{2,8})(\\.[a-z]{2,8})?)$", message = "E-pošta mora biti valida, e.g. me@mydomain.com")
+    @Email(message = "E-pošta mora biti valida, e.g. me@mydomain.com")
     private String email;
     @Column(length = 20)
-    @Pattern(regexp = "^(([\\w, ]){4,20})$", message = "Adresa mora imati 4 - 20 karaktera")
+    @Size(min=4,max=20,message = "Adresa mora imati 4 - 20 karaktera")
     private String address;
     @Column(length = 15)
-    @Pattern(regexp = "^((\\d){7,15})$", message = "Telefon mora biti unet u ispravnom formatu")
+    @Size(min=10,max=10,message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;
     @Temporal(TemporalType.DATE)
     @JsonbDateFormat(value = "yyyy-MM-dd")
@@ -61,9 +66,11 @@ public class Patient implements Serializable {
     @Temporal(TemporalType.DATE)
     @JsonbDateFormat(value = "yyyy-MM-dd")
     @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
+    @NotNull(message = "Datum kreiranja kartona je obavezan")
     private Date cardboardDate;
     @Column(nullable = false)
     @Basic(optional = false)
+    @NotNull(message = "Status kartona je obavezan")
     private boolean deactivated;
 
     public Patient() {

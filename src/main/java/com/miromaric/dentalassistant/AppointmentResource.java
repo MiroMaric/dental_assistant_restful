@@ -8,6 +8,7 @@ import com.miromaric.dentalassistant.myresponse.Status;
 import com.miromaric.dentalassistant.service.AppointmentService;
 import com.miromaric.dentalassistant.service.impl.AppointmentServiceImpl;
 import java.util.List;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -45,7 +46,7 @@ public class AppointmentResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public MyResponse save(AppointmentReq appointmentReq){
+    public MyResponse save(@Valid AppointmentReq appointmentReq){
         Appointment appointment = appointmentReq.getModel();
         service.save(appointment);
         return new MyResponse(Status.SUCCESS, appointment, null);
@@ -54,7 +55,7 @@ public class AppointmentResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse update(@PathParam("id")int id,AppointmentReq appointmentReq){
+    public MyResponse update(@PathParam("id")int id,@Valid AppointmentReq appointmentReq){
         Appointment appointment = service.update(id, appointmentReq.getModel());
         return new MyResponse(Status.SUCCESS, appointment, null);
     }
