@@ -1,10 +1,12 @@
 package com.miromaric.dentalassistant.model.dto;
 
-import com.miromaric.dentalassistant.exception.IllegalRequestException;
 import com.miromaric.dentalassistant.model.Appointment;
 import com.miromaric.dentalassistant.model.Patient;
 import com.miromaric.dentalassistant.model.User;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -12,9 +14,14 @@ import java.util.Date;
  */
 public class AppointmentReq implements DTO<Appointment>{
 
+    @NotNull(message = "Korisničko ime je obavezno")
+    @Size(min = 4,max = 20,message = "Korisničko ime mora imati 4 - 20 karaktera")
     private String username;
+    @Positive(message = "Identifikator pacijenta mora biti pozitivna vrednost")
     private int patientID;
+    @NotNull(message = "Vreme početka je obavezano")
     private Date startTime;
+    @NotNull(message = "Vreme završetka je obavezano")
     private Date endTime;
     private String description;
 
@@ -30,8 +37,6 @@ public class AppointmentReq implements DTO<Appointment>{
     }
     @Override
     public Appointment getModel(){
-        if(username==null || username.isEmpty() || startTime==null || endTime==null || patientID<=0)
-            throw new IllegalRequestException("Request format is not valid");
         return new Appointment(new User(username), new Patient(patientID), startTime, endTime, description);
     }
 

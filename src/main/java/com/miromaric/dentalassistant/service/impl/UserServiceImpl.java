@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         if(!dao.save(user)){
-            throw new ResourceAlreadyExistsException("User with this id already exists");
+            throw new ResourceAlreadyExistsException("User with this username already exists");
         }
     }
 

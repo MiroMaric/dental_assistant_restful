@@ -6,6 +6,7 @@
 package com.miromaric.dentalassistant.deserializer;
 
 import com.google.protobuf.TextFormat.ParseException;
+import com.miromaric.dentalassistant.exception.IllegalRequestException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class MyJsonDateDeserializer implements JsonbDeserializer<Date>{
         try {
             return format.parse(date);
         } catch (java.text.ParseException ex) {
-            throw new RuntimeException("Date must be in yyyy-MM-dd format");
+            throw new IllegalRequestException("Date must be in yyyy-MM-dd format");
         }
     }
     

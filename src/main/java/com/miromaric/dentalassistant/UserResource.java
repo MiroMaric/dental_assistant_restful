@@ -6,6 +6,8 @@ import com.miromaric.dentalassistant.myresponse.Status;
 import com.miromaric.dentalassistant.service.UserService;
 import com.miromaric.dentalassistant.service.impl.UserServiceImpl;
 import java.util.List;
+import javax.validation.Valid;
+import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,7 +45,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse save(User user){
+    public MyResponse save(@Valid User user){
         service.save(user);
         return new MyResponse(Status.SUCCESS, user, null);
     }
@@ -60,7 +62,7 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{username}")
-    public MyResponse update(@PathParam("username")String username,User user){
+    public MyResponse update(@PathParam("username")String username,@Valid User user){
         User uUser = service.update(username,user);
         return new MyResponse(Status.SUCCESS, uUser, null);
     }
