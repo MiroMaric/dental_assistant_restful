@@ -31,8 +31,11 @@ import javax.persistence.TemporalType;
 public class Appointment implements Serializable {
     /*
     Problem za generesinjem tabele u bazi zbog @GenerateValue!
+    Ovde baca exception prilikom ubacivanja novog entiteta u bazu.
+    Privremeno resen problem u metodi save
     */
     @Id
+    //@GeneratedValue
     private int appointmentID;
     @Id
     @Basic(optional = false)

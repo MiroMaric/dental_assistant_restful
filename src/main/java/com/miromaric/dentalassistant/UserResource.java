@@ -41,7 +41,7 @@ public class UserResource {
         User user =  service.getOne(username);
         return new MyResponse(Status.SUCCESS, user, null);
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

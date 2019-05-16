@@ -18,9 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.eclipse.yasson.internal.serializer.DateTypeDeserializer;
 
 /**
  *
@@ -30,7 +28,7 @@ import org.eclipse.yasson.internal.serializer.DateTypeDeserializer;
 @NamedQueries({
     @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p")
     ,
-    @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient p WHERE p.id = :id")
+    @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient p WHERE p.patientID = :id")
 })
 public class Patient implements Serializable {
 
