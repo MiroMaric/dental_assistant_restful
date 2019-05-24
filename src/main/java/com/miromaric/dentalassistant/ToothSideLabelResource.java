@@ -30,8 +30,8 @@ public class ToothSideLabelResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public MyResponse getAll(){
-        List<ToothSideLabel> toothSideLabel =  service.getAll();
-        return new MyResponse(Status.SUCCESS, toothSideLabel, null);
+        List<ToothSideLabel> toothSideLabels =  service.getAll();
+        return new MyResponse(Status.SUCCESS, toothSideLabels, null);
     }
     
     @GET

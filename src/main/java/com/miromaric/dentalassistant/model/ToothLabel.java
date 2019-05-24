@@ -21,8 +21,7 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 @Table(name = "tooth_label")
 @NamedQueries({
-    @NamedQuery(name = "ToothLabel.getAll", query = "SELECT tl FROM ToothLabel tl")
-    ,
+    @NamedQuery(name = "ToothLabel.getAll", query = "SELECT tl FROM ToothLabel tl"),
     @NamedQuery(name = "ToothLabel.getById", query = "SELECT tl FROM ToothLabel tl WHERE tl.toothLabelID = :id")
 })
 public class ToothLabel implements Serializable{
