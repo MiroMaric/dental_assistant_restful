@@ -10,7 +10,7 @@ import java.util.List;
 public interface AppointmentDao {
     boolean save(Appointment appointment);
     List<Appointment> getAll();
-    Appointment getOne(int id);
-    Appointment update(int id,Appointment appointment);
-    Appointment remove(int id);
+    Appointment getOne(Long id);
+    Appointment update(Long id,Appointment appointment);
+    Appointment remove(Long id);
 }

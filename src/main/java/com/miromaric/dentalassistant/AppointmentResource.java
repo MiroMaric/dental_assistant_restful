@@ -39,7 +39,7 @@ public class AppointmentResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public MyResponse getOne(@PathParam("id")int id){
+    public MyResponse getOne(@PathParam("id")Long id){
         Appointment appointment = service.getOne(id);
         return new MyResponse(Status.SUCCESS, appointment, null);
     }
@@ -56,7 +56,7 @@ public class AppointmentResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse update(@PathParam("id")int id,@Valid AppointmentReq appointmentReq){
+    public MyResponse update(@PathParam("id")Long id,@Valid AppointmentReq appointmentReq){
         Appointment appointment = service.update(id, appointmentReq.getModel());
         return new MyResponse(Status.SUCCESS, appointment, null);
     }
@@ -64,7 +64,7 @@ public class AppointmentResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse remove(@PathParam("id")int id){
+    public MyResponse remove(@PathParam("id")Long id){
         Appointment appointment = service.remove(id);
         return new MyResponse(Status.SUCCESS, appointment, null);
     }

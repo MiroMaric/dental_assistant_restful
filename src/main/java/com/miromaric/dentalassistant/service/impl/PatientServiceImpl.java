@@ -26,7 +26,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient getOne(int id) {
+    public Patient getOne(Long id) {
         Patient patient = dao.getOne(id);
         if(patient!=null)
             return patient;
@@ -34,7 +34,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient update(int id, Patient patient) {
+    public Patient update(Long id, Patient patient) {
         Patient dbPatient = dao.update(id, patient);
         if(dbPatient!=null)
             return dbPatient;
@@ -42,7 +42,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient remove(int id) {
+    public Patient remove(Long id) {
         Patient patient = dao.remove(id);
         if(patient!=null)
             return patient;

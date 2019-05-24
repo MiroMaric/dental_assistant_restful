@@ -1,6 +1,7 @@
 package com.miromaric.dentalassistant.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,11 +30,11 @@ public class ToothSideLabel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false,length = 5)
-    private int toothSideLabelID;
+    private Long toothSideLabelID;
     
     @Column(nullable = false, length = 20)
     @Basic(optional = false)
-    @NotNull(message = "Naziv ozneke je obavezan")
+    @NotNull(message = "Naziv oznake je obavezan")
     @Size(max = 20,message = "Naziv može imati najviše 20 karaktera")
     private String name;
     
@@ -43,17 +44,17 @@ public class ToothSideLabel implements Serializable {
     public ToothSideLabel() {
     }
 
-    public ToothSideLabel(int toothSideLabelID, String name, String description) {
+    public ToothSideLabel(Long toothSideLabelID, String name, String description) {
         this.toothSideLabelID = toothSideLabelID;
         this.name = name;
         this.description = description;
     }
 
-    public int getToothSideLabelID() {
+    public Long getToothSideLabelID() {
         return toothSideLabelID;
     }
 
-    public void setToothSideLabelID(int toothSideLabelID) {
+    public void setToothSideLabelID(Long toothSideLabelID) {
         this.toothSideLabelID = toothSideLabelID;
     }
 
@@ -75,8 +76,8 @@ public class ToothSideLabel implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + this.toothSideLabelID;
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.toothSideLabelID);
         return hash;
     }
 
@@ -92,7 +93,10 @@ public class ToothSideLabel implements Serializable {
             return false;
         }
         final ToothSideLabel other = (ToothSideLabel) obj;
-        return this.toothSideLabelID == other.toothSideLabelID;
+        if (!Objects.equals(this.toothSideLabelID, other.toothSideLabelID)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

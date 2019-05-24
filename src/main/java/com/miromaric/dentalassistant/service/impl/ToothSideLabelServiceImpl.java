@@ -25,7 +25,7 @@ public class ToothSideLabelServiceImpl implements ToothSideLabelService{
     }
 
     @Override
-    public ToothSideLabel getOne(int id) {
+    public ToothSideLabel getOne(Long id) {
         ToothSideLabel toothSideLabel = dao.getOne(id);
         if(toothSideLabel!=null)
             return toothSideLabel;
@@ -33,7 +33,7 @@ public class ToothSideLabelServiceImpl implements ToothSideLabelService{
     }
 
     @Override
-    public ToothSideLabel update(int id, ToothSideLabel toothSideLabel) {
+    public ToothSideLabel update(Long id, ToothSideLabel toothSideLabel) {
         ToothSideLabel dbToothSideLabel = dao.update(id,toothSideLabel);
         if(dbToothSideLabel!=null)
             return dbToothSideLabel;
@@ -41,7 +41,7 @@ public class ToothSideLabelServiceImpl implements ToothSideLabelService{
     }
 
     @Override
-    public ToothSideLabel remove(int id) {
+    public ToothSideLabel remove(Long id) {
         ToothSideLabel toothSideLabel = dao.remove(id);
         if(toothSideLabel!=null)
             return toothSideLabel;

@@ -34,7 +34,7 @@ public class ToothLabelDaoImpl implements ToothLabelDao{
     }
 
     @Override
-    public ToothLabel getOne(int id) {
+    public ToothLabel getOne(Long id) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -44,7 +44,7 @@ public class ToothLabelDaoImpl implements ToothLabelDao{
     }
 
     @Override
-    public ToothLabel update(int id, ToothLabel toothLabel) {
+    public ToothLabel update(Long id, ToothLabel toothLabel) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -59,7 +59,7 @@ public class ToothLabelDaoImpl implements ToothLabelDao{
     }
 
     @Override
-    public ToothLabel remove(int id) {
+    public ToothLabel remove(Long id) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

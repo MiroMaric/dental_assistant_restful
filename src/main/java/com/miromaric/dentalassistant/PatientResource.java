@@ -37,7 +37,7 @@ public class PatientResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse getOne(@PathParam("id")int id){
+    public MyResponse getOne(@PathParam("id")Long id){
         Patient patient =  service.getOne(id);
         return new MyResponse(Status.SUCCESS, patient, null);
     }
@@ -53,7 +53,7 @@ public class PatientResource {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse remove(@PathParam("id")int id){
+    public MyResponse remove(@PathParam("id")Long id){
         Patient patient = service.remove(id);
         return new MyResponse(Status.SUCCESS, patient, null);
     }
@@ -62,7 +62,7 @@ public class PatientResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse update(@PathParam("id")int id,@Valid Patient patient){
+    public MyResponse update(@PathParam("id")Long id,@Valid Patient patient){
         Patient uPatient = service.update(id,patient);
         return new MyResponse(Status.SUCCESS, uPatient, null);
     }

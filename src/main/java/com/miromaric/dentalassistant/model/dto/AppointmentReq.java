@@ -18,7 +18,7 @@ public class AppointmentReq implements DTO<Appointment>{
     @Size(min = 4,max = 20,message = "Korisničko ime mora imati 4 - 20 karaktera")
     private String username;
     @Positive(message = "Identifikator pacijenta mora biti pozitivna vrednost")
-    private int patientID;
+    private Long patientID;
     @NotNull(message = "Vreme početka je obavezano")
     private Date startTime;
     @NotNull(message = "Vreme završetka je obavezano")
@@ -28,13 +28,14 @@ public class AppointmentReq implements DTO<Appointment>{
     public AppointmentReq() {
     }
 
-    public AppointmentReq(String username, int patientID, Date startTime, Date endTime, String description) {
+    public AppointmentReq(String username, Long patientID, Date startTime, Date endTime, String description) {
         this.username = username;
         this.patientID = patientID;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
     }
+    
     @Override
     public Appointment getModel(){
         return new Appointment(new User(username), new Patient(patientID), startTime, endTime, description);
@@ -48,11 +49,11 @@ public class AppointmentReq implements DTO<Appointment>{
         this.username = username;
     }
 
-    public int getPatientID() {
+    public Long getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(int patientID) {
+    public void setPatientID(Long patientID) {
         this.patientID = patientID;
     }
 

@@ -37,7 +37,7 @@ public class ToothLabelResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse getOne(@PathParam("id")int id){
+    public MyResponse getOne(@PathParam("id")Long id){
         ToothLabel toothLabel =  service.getOne(id);
         return new MyResponse(Status.SUCCESS, toothLabel, null);
     }
@@ -53,7 +53,7 @@ public class ToothLabelResource {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse remove(@PathParam("id")int id){
+    public MyResponse remove(@PathParam("id")Long id){
         ToothLabel toothLabel = service.remove(id);
         return new MyResponse(Status.SUCCESS, toothLabel, null);
     }
@@ -62,7 +62,7 @@ public class ToothLabelResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MyResponse update(@PathParam("id")int id,@Valid ToothLabel toothLabel){
+    public MyResponse update(@PathParam("id")Long id,@Valid ToothLabel toothLabel){
         ToothLabel uToothLabel = service.update(id,toothLabel);
         return new MyResponse(Status.SUCCESS, uToothLabel, null);
     }

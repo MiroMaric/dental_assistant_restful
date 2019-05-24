@@ -37,7 +37,7 @@ public class Appointment implements Serializable {
     @Id
     //zakomentarisi posle
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int appointmentID;
+    private Long appointmentID;
     @Id
     @Basic(optional = false)
     @JoinColumn(name = "username",referencedColumnName = "username",updatable = false,insertable = false)
@@ -61,7 +61,7 @@ public class Appointment implements Serializable {
     public Appointment() {
     }
 
-    public Appointment(int appointmentID,User user, Patient patient, Date startTime, Date endTime, String description) {
+    public Appointment(Long appointmentID,User user, Patient patient, Date startTime, Date endTime, String description) {
         this.appointmentID = appointmentID;
         this.user = user;
         this.patient = patient;
@@ -78,11 +78,11 @@ public class Appointment implements Serializable {
     }
     
 
-    public int getAppointmentID() {
+    public Long getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(int appointmentID) {
+    public void setAppointmentID(Long appointmentID) {
         this.appointmentID = appointmentID;
     }
     
@@ -129,9 +129,9 @@ public class Appointment implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + this.appointmentID;
-        hash = 29 * hash + Objects.hashCode(this.user);
-        hash = 29 * hash + Objects.hashCode(this.patient);
+        hash = 37 * hash + Objects.hashCode(this.appointmentID);
+        hash = 37 * hash + Objects.hashCode(this.user);
+        hash = 37 * hash + Objects.hashCode(this.patient);
         return hash;
     }
 
@@ -147,7 +147,7 @@ public class Appointment implements Serializable {
             return false;
         }
         final Appointment other = (Appointment) obj;
-        if (this.appointmentID != other.appointmentID) {
+        if (!Objects.equals(this.appointmentID, other.appointmentID)) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {

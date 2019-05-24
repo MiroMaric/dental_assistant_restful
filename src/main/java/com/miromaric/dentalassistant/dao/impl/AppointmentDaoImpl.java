@@ -29,11 +29,11 @@ public class AppointmentDaoImpl implements AppointmentDao {
         }
         appointment.setPatient(patient);
         appointment.setUser(user);
-        Integer maxId = em.createQuery("select max(a.appointmentID) from Appointment a", Integer.class).getSingleResult();
+        Long maxId = em.createQuery("select max(a.appointmentID) from Appointment a", Long.class).getSingleResult();
         if (maxId != null) {
             appointment.setAppointmentID(maxId + 1);
         } else {
-            appointment.setAppointmentID(1);
+            appointment.setAppointmentID(new Long(1));
         }
         em.persist(appointment);
         em.getTransaction().commit();
@@ -52,7 +52,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public Appointment getOne(int id) {
+    public Appointment getOne(Long id) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -68,7 +68,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public Appointment update(int id, Appointment appointment) {
+    public Appointment update(Long id, Appointment appointment) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -87,7 +87,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public Appointment remove(int id) {
+    public Appointment remove(Long id) {
         EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

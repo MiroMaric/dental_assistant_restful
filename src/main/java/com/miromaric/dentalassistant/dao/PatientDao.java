@@ -10,7 +10,7 @@ import java.util.List;
 public interface PatientDao {
     void save(Patient patient);
     List<Patient> getAll();
-    Patient getOne(int id);
-    Patient update(int id,Patient patient);
-    Patient remove(int id);
+    Patient getOne(Long id);
+    Patient update(Long id,Patient patient);
+    Patient remove(Long id);
 }

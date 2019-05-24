@@ -1,6 +1,7 @@
 package com.miromaric.dentalassistant.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,15 +30,18 @@ public class ToothLabel implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false,length = 5)
-    private int toothLabelID;
+    private Long toothLabelID;
+    
     @Basic(optional = false)
     @Column(nullable = false)
     @Range(min = 1,max = 8)
     private int number;
+    
     @Basic(optional = false)
     @Column(nullable = false)
     @Range(min = 1,max = 4)
     private int quadrant;
+    
     @Basic(optional = false)
     @Column(nullable = false)
     @Range(min = 1,max = 3)
@@ -49,11 +53,11 @@ public class ToothLabel implements Serializable{
     public ToothLabel() {
     }
     
-    public ToothLabel(int toothLabelID){
+    public ToothLabel(Long toothLabelID){
         this.toothLabelID = toothLabelID;
     }
 
-    public ToothLabel(int toothLabelID, int number, int quadrant, int numOfRoots, String description) {
+    public ToothLabel(Long toothLabelID, int number, int quadrant, int numOfRoots, String description) {
         this.toothLabelID = toothLabelID;
         this.number = number;
         this.quadrant = quadrant;
@@ -61,11 +65,11 @@ public class ToothLabel implements Serializable{
         this.description = description;
     }
 
-    public int getToothLabelID() {
+    public Long getToothLabelID() {
         return toothLabelID;
     }
 
-    public void setToothLabelID(int toothLabelID) {
+    public void setToothLabelID(Long toothLabelID) {
         this.toothLabelID = toothLabelID;
     }
 
@@ -104,7 +108,7 @@ public class ToothLabel implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + this.toothLabelID;
+        hash = 23 * hash + Objects.hashCode(this.toothLabelID);
         return hash;
     }
 
@@ -120,8 +124,12 @@ public class ToothLabel implements Serializable{
             return false;
         }
         final ToothLabel other = (ToothLabel) obj;
-        return this.toothLabelID == other.toothLabelID;
+        if (!Objects.equals(this.toothLabelID, other.toothLabelID)) {
+            return false;
+        }
+        return true;
     }
+
 
     @Override
     public String toString() {

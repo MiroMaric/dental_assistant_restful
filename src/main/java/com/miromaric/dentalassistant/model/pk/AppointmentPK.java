@@ -10,14 +10,14 @@ import java.util.Objects;
  * @author MikoPC
  */
 public class AppointmentPK implements Serializable {
-    public int appointmentID;
+    public Long appointmentID;
     private Patient patient;
     private User user;
 
     public AppointmentPK() {
     }
 
-    public AppointmentPK(int appointmentID, Patient patient, User user) {
+    public AppointmentPK(Long appointmentID, Patient patient, User user) {
         this.appointmentID = appointmentID;
         this.patient = patient;
         this.user = user;
@@ -29,11 +29,11 @@ public class AppointmentPK implements Serializable {
     }
     
     
-    public int getAppointmentID() {
+    public Long getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(int appointmentID) {
+    public void setAppointmentID(Long appointmentID) {
         this.appointmentID = appointmentID;
     }
 
@@ -56,9 +56,9 @@ public class AppointmentPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + this.appointmentID;
-        hash = 71 * hash + Objects.hashCode(this.patient);
-        hash = 71 * hash + Objects.hashCode(this.user);
+        hash = 47 * hash + Objects.hashCode(this.appointmentID);
+        hash = 47 * hash + Objects.hashCode(this.patient);
+        hash = 47 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -74,7 +74,7 @@ public class AppointmentPK implements Serializable {
             return false;
         }
         final AppointmentPK other = (AppointmentPK) obj;
-        if (this.appointmentID != other.appointmentID) {
+        if (!Objects.equals(this.appointmentID, other.appointmentID)) {
             return false;
         }
         if (!Objects.equals(this.patient, other.patient)) {

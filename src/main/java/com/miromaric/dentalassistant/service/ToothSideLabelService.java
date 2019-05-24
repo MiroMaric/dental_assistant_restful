@@ -8,9 +8,10 @@ import java.util.List;
  * @author MikoPC
  */
 public interface ToothSideLabelService {
+    
     void save(ToothSideLabel toothSideLabel);
     List<ToothSideLabel> getAll();
-    ToothSideLabel getOne(int id);
-    ToothSideLabel update(int id,ToothSideLabel toothSideLabel);
-    ToothSideLabel remove(int id);
+    ToothSideLabel getOne(Long id);
+    ToothSideLabel update(Long id,ToothSideLabel toothSideLabel);
+    ToothSideLabel remove(Long id);
 }

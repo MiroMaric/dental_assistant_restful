@@ -10,7 +10,7 @@ import java.util.List;
 public interface ToothLabelDao {
     void save(ToothLabel toothLabel);
     List<ToothLabel> getAll();
-    ToothLabel getOne(int id);
-    ToothLabel update(int id,ToothLabel toothLabel);
-    ToothLabel remove(int id);
+    ToothLabel getOne(Long id);
+    ToothLabel update(Long id,ToothLabel toothLabel);
+    ToothLabel remove(Long id);
 }

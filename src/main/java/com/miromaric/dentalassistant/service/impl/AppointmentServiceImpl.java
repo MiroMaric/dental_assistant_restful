@@ -27,7 +27,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public Appointment getOne(int id) {
+    public Appointment getOne(Long id) {
         Appointment appointment = dao.getOne(id);
         if(appointment!=null)
             return appointment;
@@ -35,7 +35,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public Appointment update(int id, Appointment appointment) {
+    public Appointment update(Long id, Appointment appointment) {
         Appointment uAppointment = dao.update(id,appointment);
         if(uAppointment!=null)
             return uAppointment;
@@ -43,7 +43,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public Appointment remove(int id) {
+    public Appointment remove(Long id) {
         Appointment appointment = dao.remove(id);
         if(appointment!=null)
             return appointment;
