@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 public class ToothLabelResource {
 
     private final ToothLabelService service = new ToothLabelServiceImpl();
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public MyResponse getAll(){

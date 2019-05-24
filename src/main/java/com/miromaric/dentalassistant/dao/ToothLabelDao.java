@@ -1,6 +1,5 @@
 package com.miromaric.dentalassistant.dao;
 
-import com.miromaric.dentalassistant.model.Patient;
 import com.miromaric.dentalassistant.model.ToothLabel;
 import java.util.List;
 

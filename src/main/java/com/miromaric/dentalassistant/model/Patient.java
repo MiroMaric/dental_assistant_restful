@@ -37,28 +37,35 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientID;
+    
     @Column(nullable = false,length = 15)
     @Basic(optional = false)
     @NotNull(message = "Ime je obavezno")
     @Size(min=2,max=15,message = "Ime mora imati 2 - 15 karaktera")
     private String firstname;
+    
     @Column(nullable = false,length = 15)
     @Basic(optional = false)
     @Size(min=2,max=15,message = "Prezime mora imati 2 - 15 karaktera")
     @NotNull(message = "Prezime je obavezno")
     private String lastname;
+    
     @Email(message = "E-pošta mora biti valida, e.g. me@mydomain.com")
     private String email;
+    
     @Column(length = 20)
     @Size(min=4,max=20,message = "Adresa mora imati 4 - 20 karaktera")
     private String address;
+    
     @Column(length = 15)
     @Size(min=10,max=10,message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;
+    
     @Temporal(TemporalType.DATE)
     @JsonbDateFormat(value = "yyyy-MM-dd")
     @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     private Date birthDate;
+    
     @Column(nullable = false)
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
@@ -66,6 +73,7 @@ public class Patient implements Serializable {
     @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     @NotNull(message = "Datum kreiranja kartona je obavezan")
     private Date cardboardDate;
+    
     @Column(nullable = false)
     @Basic(optional = false)
     @NotNull(message = "Status kartona je obavezan")

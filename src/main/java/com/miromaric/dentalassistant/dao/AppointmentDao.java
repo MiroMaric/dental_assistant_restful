@@ -1,7 +1,6 @@
 package com.miromaric.dentalassistant.dao;
 
 import com.miromaric.dentalassistant.model.Appointment;
-import com.miromaric.dentalassistant.model.Patient;
 import java.util.List;
 
 /**

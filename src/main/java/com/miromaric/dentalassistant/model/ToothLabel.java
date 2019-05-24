@@ -5,10 +5,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 /**
@@ -24,9 +26,9 @@ import org.hibernate.validator.constraints.Range;
 })
 public class ToothLabel implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(nullable = false,length = 5)
     private int toothLabelID;
     @Basic(optional = false)
     @Column(nullable = false)
@@ -40,6 +42,8 @@ public class ToothLabel implements Serializable{
     @Column(nullable = false)
     @Range(min = 1,max = 3)
     private int numOfRoots;
+    
+    @Size(max = 255,message = "Opis može imati najviše 255 karaktera")
     private String description;
 
     public ToothLabel() {
