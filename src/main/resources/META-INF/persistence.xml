@@ -10,6 +10,7 @@
     <class>com.miromaric.dentalassistant.model.ToothRootLabel</class>
     <class>com.miromaric.dentalassistant.model.ToothState</class>
     <class>com.miromaric.dentalassistant.model.ToothSideState</class>
+    <class>com.miromaric.dentalassistant.model.ToothRootState</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_bb2ba77dbf768d3?zeroDateTimeBehavior=convertToNull"/>

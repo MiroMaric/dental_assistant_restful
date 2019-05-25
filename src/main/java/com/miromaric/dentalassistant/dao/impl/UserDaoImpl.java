@@ -1,13 +1,11 @@
 package com.miromaric.dentalassistant.dao.impl;
 
 import com.miromaric.dentalassistant.dao.UserDao;
-import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.User;
 import com.miromaric.dentalassistant.persistence.MyPersistence;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.validation.Valid;
 
 public class UserDaoImpl implements UserDao {
 
