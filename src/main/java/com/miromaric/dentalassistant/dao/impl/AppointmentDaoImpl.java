@@ -1,6 +1,6 @@
 package com.miromaric.dentalassistant.dao.impl;
 
-import com.miromaric.dentalassistant.dao.AppointmentDao;
+import com.miromaric.dentalassistant.dao.AbstractDAO;
 import com.miromaric.dentalassistant.model.Appointment;
 import com.miromaric.dentalassistant.model.Patient;
 import com.miromaric.dentalassistant.model.User;
@@ -14,7 +14,7 @@ import javax.persistence.NoResultException;
  *
  * @author MikoPC
  */
-public class AppointmentDaoImpl implements AppointmentDao {
+public class AppointmentDaoImpl extends AbstractDAO<Appointment, Long> {
 
     @Override
     public boolean save(Appointment appointment) {
@@ -41,67 +41,92 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return true;
     }
 
+//    @Override
+//    public List<Appointment> getAll() {
+//        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        List<Appointment> appointments = 
+//        em.close();
+//        return appointments;
+//    }
+//
+//    @Override
+//    public Appointment getOne(Long id) {
+//        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        Appointment appointment;
+//        try {
+//            appointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
+//        } catch (NoResultException e) {
+//            em.close();
+//            return null;
+//        }
+//        em.close();
+//        return appointment;
+//    }
+//
+//    @Override
+//    public Appointment update(Long id, Appointment appointment) {
+//        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        Appointment dbAppointment;
+//        try {
+//            dbAppointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
+//        } catch (NoResultException e) {
+//            em.close();
+//            return null;
+//        }
+//        appointment.setAppointmentID(dbAppointment.getAppointmentID());
+//        em.merge(appointment);
+//        em.getTransaction().commit();
+//        em.close();
+//        return dbAppointment;
+//    }
+//
+//    @Override
+//    public Appointment remove(Long id) {
+//        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        Appointment appointment;
+//        try {
+//            appointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
+//        } catch (NoResultException e) {
+//            em.close();
+//            return null;
+//        }
+//        em.remove(appointment);
+//        em.getTransaction().commit();
+//        em.close();
+//        return appointment;
+//    }
+
     @Override
-    public List<Appointment> getAll() {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<Appointment> appointments = em.createNamedQuery("Appointment.getAll").getResultList();
-        em.close();
-        return appointments;
+    protected Appointment findExistingResource(Appointment resource, EntityManager em) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Appointment getOne(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Appointment appointment;
+    protected List<Appointment> findAllResources(EntityManager em) {
+        return em.createNamedQuery("Appointment.getAll").getResultList();
+    }
+
+    @Override
+    protected Appointment findResourceById(Long id, EntityManager em) {
         try {
-            appointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
+            return (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
         } catch (NoResultException e) {
             em.close();
             return null;
         }
-        em.close();
-        return appointment;
     }
 
     @Override
-    public Appointment update(Long id, Appointment appointment) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Appointment dbAppointment;
-        try {
-            dbAppointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
-        } catch (NoResultException e) {
-            em.close();
-            return null;
-        }
-        appointment.setAppointmentID(dbAppointment.getAppointmentID());
-        em.merge(appointment);
-        em.getTransaction().commit();
-        em.close();
-        return dbAppointment;
-    }
-
-    @Override
-    public Appointment remove(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Appointment appointment;
-        try {
-            appointment = (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
-        } catch (NoResultException e) {
-            em.close();
-            return null;
-        }
-        em.remove(appointment);
-        em.getTransaction().commit();
-        em.close();
-        return appointment;
+    protected void setIdToResource(Appointment resource, Long key) {
+        resource.setAppointmentID(key);
     }
 
 }

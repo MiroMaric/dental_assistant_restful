@@ -1,6 +1,6 @@
 package com.miromaric.dentalassistant.service.impl;
 
-import com.miromaric.dentalassistant.dao.ToothLabelDao;
+import com.miromaric.dentalassistant.dao.DAO;
 import com.miromaric.dentalassistant.dao.impl.ToothLabelDaoImpl;
 import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.ToothLabel;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ToothLabelServiceImpl implements ToothLabelService{
 
-    private final ToothLabelDao dao = new ToothLabelDaoImpl();
+    private final DAO<ToothLabel,Long> dao = new ToothLabelDaoImpl();
     
     @Override
     public void save(ToothLabel toothLabel) {

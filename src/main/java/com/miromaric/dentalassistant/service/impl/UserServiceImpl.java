@@ -1,6 +1,6 @@
 package com.miromaric.dentalassistant.service.impl;
 
-import com.miromaric.dentalassistant.dao.UserDao;
+import com.miromaric.dentalassistant.dao.DAO;
 import com.miromaric.dentalassistant.dao.impl.UserDaoImpl;
 import com.miromaric.dentalassistant.exception.ResourceAlreadyExistsException;
 import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    UserDao dao = new UserDaoImpl();
+    private final DAO<User,String> dao = new UserDaoImpl();
 
     @Override
     public void save(User user) {

@@ -1,75 +1,34 @@
 package com.miromaric.dentalassistant.dao.impl;
 
-import com.miromaric.dentalassistant.dao.ToothLabelDao;
+import com.miromaric.dentalassistant.dao.AbstractDAO;
 import com.miromaric.dentalassistant.model.ToothLabel;
-import com.miromaric.dentalassistant.persistence.MyPersistence;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author Tatjana
  */
-public class ToothLabelDaoImpl implements ToothLabelDao{
+public class ToothLabelDaoImpl extends AbstractDAO<ToothLabel, Long>{
 
     @Override
-    public void save(ToothLabel toothLabel) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(toothLabel);
-        em.getTransaction().commit();
-        em.close();
+    protected ToothLabel findExistingResource(ToothLabel resource, EntityManager em) {
+        return null;
     }
 
     @Override
-    public List<ToothLabel> getAll() {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<ToothLabel> toothLabels = em.createNamedQuery("ToothLabel.getAll").getResultList();
-        em.close();
-        return toothLabels;
+    protected List<ToothLabel> findAllResources(EntityManager em) {
+        return em.createNamedQuery("ToothLabel.getAll").getResultList();
     }
 
     @Override
-    public ToothLabel getOne(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ToothLabel toothLabel = em.find(ToothLabel.class, id);
-        em.close();
-        return toothLabel;
+    protected ToothLabel findResourceById(Long id, EntityManager em) {
+        return em.find(ToothLabel.class, id);
     }
 
     @Override
-    public ToothLabel update(Long id, ToothLabel toothLabel) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ToothLabel dbToothLabel = em.find(ToothLabel.class, id);
-        if(dbToothLabel!=null){
-            toothLabel.setToothLabelID(dbToothLabel.getToothLabelID());
-            em.merge(toothLabel);
-            em.getTransaction().commit();
-        }
-        em.close();
-        return dbToothLabel;
-    }
-
-    @Override
-    public ToothLabel remove(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ToothLabel toothLabel = em.find(ToothLabel.class, id);
-        if(toothLabel!=null){
-            em.remove(toothLabel);
-            em.getTransaction().commit();
-        }
-        em.close();
-        return toothLabel;
+    protected void setIdToResource(ToothLabel resource, Long key) {
+        resource.setToothLabelID(key);
     }
     
 }

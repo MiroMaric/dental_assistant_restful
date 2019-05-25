@@ -1,74 +1,34 @@
 package com.miromaric.dentalassistant.dao.impl;
 
-import com.miromaric.dentalassistant.dao.PatientDao;
+import com.miromaric.dentalassistant.dao.AbstractDAO;
 import com.miromaric.dentalassistant.model.Patient;
-import com.miromaric.dentalassistant.persistence.MyPersistence;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author MikoPC
  */
-public class PatientDaoImpl implements PatientDao {
+public class PatientDaoImpl extends AbstractDAO<Patient, Long> {
 
     @Override
-    public void save(Patient patient) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(patient);
-        em.getTransaction().commit();
-        em.close();
+    protected Patient findExistingResource(Patient resource, EntityManager em) {
+        return null;
     }
 
     @Override
-    public List<Patient> getAll() {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<Patient> patients = em.createNamedQuery("Patient.getAll").getResultList();
-        em.close();
-        return patients;
+    protected List<Patient> findAllResources(EntityManager em) {
+        return em.createNamedQuery("Patient.getAll").getResultList();
     }
 
     @Override
-    public Patient getOne(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Patient patient = em.find(Patient.class, id);
-        em.close();
-        return patient;
+    protected Patient findResourceById(Long id, EntityManager em) {
+        return em.find(Patient.class, id);
     }
 
     @Override
-    public Patient update(Long id, Patient patient) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Patient dbPatient = em.find(Patient.class, id);
-        if(dbPatient!=null){
-            em.merge(patient);
-            em.getTransaction().commit();
-        }
-        em.close();
-        return dbPatient;
-    }
-
-    @Override
-    public Patient remove(Long id) {
-        EntityManagerFactory emf = MyPersistence.getInstance().getEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Patient patient = em.find(Patient.class, id);
-        if(patient!=null){
-            em.remove(patient);
-            em.getTransaction().commit();
-        }
-        em.close();
-        return patient;
+    protected void setIdToResource(Patient resource, Long key) {
+        resource.setPatientID(key);
     }
 
 }

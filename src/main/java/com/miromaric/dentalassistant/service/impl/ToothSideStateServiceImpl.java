@@ -1,6 +1,6 @@
 package com.miromaric.dentalassistant.service.impl;
 
-import com.miromaric.dentalassistant.dao.ToothSideStateDao;
+import com.miromaric.dentalassistant.dao.DAO;
 import com.miromaric.dentalassistant.dao.impl.ToothSideStateDaoImpl;
 import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.ToothSideState;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ToothSideStateServiceImpl implements ToothSideStateService{
 
-    private final ToothSideStateDao dao = new ToothSideStateDaoImpl();
+    private final DAO<ToothSideState,Long> dao = new ToothSideStateDaoImpl();
     
     @Override
     public void save(ToothSideState toothSideState) {

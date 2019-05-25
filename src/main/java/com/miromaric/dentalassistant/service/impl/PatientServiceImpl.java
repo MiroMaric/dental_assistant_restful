@@ -1,6 +1,6 @@
 package com.miromaric.dentalassistant.service.impl;
 
-import com.miromaric.dentalassistant.dao.PatientDao;
+import com.miromaric.dentalassistant.dao.DAO;
 import com.miromaric.dentalassistant.dao.impl.PatientDaoImpl;
 import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.Patient;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PatientServiceImpl implements PatientService{
 
-    PatientDao dao = new PatientDaoImpl();
+    private final DAO<Patient, Long> dao = new PatientDaoImpl();
     
     @Override
     public void save(Patient patient) {
