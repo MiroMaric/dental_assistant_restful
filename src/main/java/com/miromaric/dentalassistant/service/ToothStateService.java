@@ -8,6 +8,7 @@ import java.util.List;
  * @author MikoPC
  */
 public interface ToothStateService {
+    
     void save(ToothState toothState);
     List<ToothState> getAll();
     ToothState getOne(Long id);
