@@ -1,16 +1,13 @@
 package com.miromaric.dentalassistant.model;
 
-import com.miromaric.dentalassistant.model.pk.InterventionItemPK;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;

@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -49,6 +50,7 @@ public class Intervention implements Serializable {
     private User user;
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "intervention")
+    @JsonIgnore
     private List<InterventionItem> items;
 
     private String note;
