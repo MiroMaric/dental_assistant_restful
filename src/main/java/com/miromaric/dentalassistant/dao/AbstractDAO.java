@@ -11,70 +11,94 @@ import javax.persistence.EntityManagerFactory;
  * @param <ResourceType>
  * @param <KeyType>
  */
-public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<ResourceType, KeyType>{
+public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<ResourceType, KeyType> {
 
     protected EntityManagerFactory emf;
 
     public AbstractDAO() {
         emf = MyPersistence.getInstance().getEntityManagerFactory();
     }
-    
+
     @Override
     public boolean save(ResourceType resource) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ResourceType dbResource = findExistingResource(resource,em);
-        if (dbResource == null) {
-            em.persist(resource);
-            em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            ResourceType dbResource = findExistingResource(resource, em);
+            if (dbResource == null) {
+                em.persist(resource);
+                em.getTransaction().commit();
+            }
+            return dbResource == null;
+        } finally {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            em.close();
         }
-        em.close();
-        return dbResource==null;
     }
-    
+
     @Override
     public ResourceType getOne(KeyType key) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ResourceType resource = findResourceById(key,em);
-        em.close();
-        return resource;
+        try {
+            em.getTransaction().begin();
+            ResourceType resource = findResourceById(key, em);
+            return resource;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public List<ResourceType> getAll() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<ResourceType> resources = findAllResources(em);
-        em.close();
-        return resources;
+        try {
+            em.getTransaction().begin();
+            List<ResourceType> resources = findAllResources(em);
+            return resources;
+
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public ResourceType update(KeyType key, ResourceType resource) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ResourceType uResource = findResourceById(key,em);
-        if(uResource!=null){
-            setIdToResource(resource,key);
-            em.merge(resource);
-            em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            ResourceType uResource = findResourceById(key, em);
+            if (uResource != null) {
+                setIdToResource(resource, key);
+                em.merge(resource);
+                em.getTransaction().commit();
+            }
+            return uResource;
+        } finally {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            em.close();
         }
-        em.close();
-        return uResource;
     }
 
     @Override
     public ResourceType remove(KeyType key) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        ResourceType resource = findResourceById(key,em);
-        if(resource!=null){
-            em.remove(resource);
-            em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            ResourceType resource = findResourceById(key, em);
+            if (resource != null) {
+                em.remove(resource);
+                em.getTransaction().commit();
+            }
+            return resource;
+        } finally {
+            if(em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            em.close();
         }
-        em.close();
-        return resource;
     }
 
     protected abstract ResourceType findExistingResource(ResourceType resource, EntityManager em);
@@ -85,5 +109,4 @@ public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<Resource
 
     protected abstract void setIdToResource(ResourceType resource, KeyType key);
 
-    
 }

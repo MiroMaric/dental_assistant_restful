@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="HerokuDentalAssistantPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.miromaric.dentalassistant.model.Patient</class>
-        <class>com.miromaric.dentalassistant.model.Appointment</class>
-        <class>com.miromaric.dentalassistant.model.User</class>
-        <class>com.miromaric.dentalassistant.model.ToothLabel</class>
-        <class>com.miromaric.dentalassistant.model.ToothSideLabel</class>
-        <class>com.miromaric.dentalassistant.model.ToothRootLabel</class>
-        <class>com.miromaric.dentalassistant.model.ToothState</class>
-        <class>com.miromaric.dentalassistant.model.ToothSideState</class>
-        <class>com.miromaric.dentalassistant.model.ToothRootState</class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_bb2ba77dbf768d3?zeroDateTimeBehavior=convertToNull"/>
-            <property name="javax.persistence.jdbc.user" value="b70256a51f8964"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.password" value="a6923d5d"/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
-      
-            <!--            <property name="hibernate.c3p0.min_size" value="5" />
+  <persistence-unit name="HerokuDentalAssistantPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.miromaric.dentalassistant.model.Patient</class>
+    <class>com.miromaric.dentalassistant.model.Appointment</class>
+    <class>com.miromaric.dentalassistant.model.User</class>
+    <class>com.miromaric.dentalassistant.model.ToothLabel</class>
+    <class>com.miromaric.dentalassistant.model.ToothSideLabel</class>
+    <class>com.miromaric.dentalassistant.model.ToothRootLabel</class>
+    <class>com.miromaric.dentalassistant.model.ToothState</class>
+    <class>com.miromaric.dentalassistant.model.ToothSideState</class>
+    <class>com.miromaric.dentalassistant.model.ToothRootState</class>
+    <class>com.miromaric.dentalassistant.model.Intervention</class>
+    <class>com.miromaric.dentalassistant.model.InterventionItem</class>
+    <class>com.miromaric.dentalassistant.model.SideIntervention</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_bb2ba77dbf768d3?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="b70256a51f8964"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="a6923d5d"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
+      <!--            <property name="hibernate.c3p0.min_size" value="5" />
             <property name="hibernate.c3p0.max_size" value="20" />
             <property name="hibernate.c3p0.timeout" value="300" />
             <property name="hibernate.c3p0.max_statements" value="50" />
             <property name="hibernate.c3p0.idle_test_period" value="120" />-->
-        </properties>
-    </persistence-unit>
-    <!--com.miromaric_DentalAssistant-RESTfulWebService_war_1.0-SNAPSHOTPU-->
+    </properties>
+  </persistence-unit>
+  <!--com.miromaric_DentalAssistant-RESTfulWebService_war_1.0-SNAPSHOTPU-->
 </persistence>
