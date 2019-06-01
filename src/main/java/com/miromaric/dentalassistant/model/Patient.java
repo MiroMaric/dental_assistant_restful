@@ -3,10 +3,12 @@ package com.miromaric.dentalassistant.model;
 import com.miromaric.dentalassistant.deserializer.MyJsonDateDeserializer;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbTypeDeserializer;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -78,6 +81,9 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @NotNull(message = "Status kartona je obavezan")
     private boolean deactivated;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient")
+    private List<Tooth> teeth;
 
     public Patient() {
     }
@@ -86,7 +92,7 @@ public class Patient implements Serializable {
         this.patientID = patientID;
     }
 
-    public Patient(Long patientID, String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated) {
+    public Patient(Long patientID, String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated, List<Tooth> teeth) {
         this.patientID = patientID;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -96,6 +102,7 @@ public class Patient implements Serializable {
         this.birthDate = birthDate;
         this.cardboardDate = cardboardDate;
         this.deactivated = deactivated;
+        this.teeth = teeth;
     }
     
     public Patient(String firstname, String lastname, String email, String address, String phone, Date birthDate, Date cardboardDate, boolean deactivated) {
@@ -179,6 +186,14 @@ public class Patient implements Serializable {
 
     public void setDeactivated(boolean deactivated) {
         this.deactivated = deactivated;
+    }
+
+    public List<Tooth> getTeeth() {
+        return teeth;
+    }
+
+    public void setTeeth(List<Tooth> teeth) {
+        this.teeth = teeth;
     }
 
     @Override

@@ -18,8 +18,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "User.getAll", query = "SELECT u FROM User u")
-    ,
+    @NamedQuery(name = "User.getAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.getByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 })
 public class User implements Serializable{

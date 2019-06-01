@@ -14,6 +14,7 @@
     <class>com.miromaric.dentalassistant.model.Intervention</class>
     <class>com.miromaric.dentalassistant.model.InterventionItem</class>
     <class>com.miromaric.dentalassistant.model.SideIntervention</class>
+    <class>com.miromaric.dentalassistant.model.Tooth</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_bb2ba77dbf768d3?zeroDateTimeBehavior=convertToNull"/>

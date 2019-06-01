@@ -28,31 +28,31 @@ public abstract class InterventionItem implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false,updatable = false)
     @Basic(optional = false)
-    private Long itemID;
+    protected Long interventionItemID;
     
     //@Id
     @ManyToOne(optional = false)
     @JoinColumn(name = "interventionID", referencedColumnName = "interventionID", insertable = false, updatable = false)
     @Basic(optional = false)
-    private Intervention intervention;
+    protected Intervention intervention;
     
-    private String note;
+    protected String note;
 
     public InterventionItem() {
     }
 
     public InterventionItem(Long itemID, Intervention intervention, String note) {
-        this.itemID = itemID;
+        this.interventionItemID = itemID;
         this.intervention = intervention;
         this.note = note;
     }
 
     public Long getItemID() {
-        return itemID;
+        return interventionItemID;
     }
 
     public void setItemID(Long itemID) {
-        this.itemID = itemID;
+        this.interventionItemID = itemID;
     }
 
     public Intervention getIntervention() {
@@ -73,9 +73,9 @@ public abstract class InterventionItem implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.itemID);
-        hash = 53 * hash + Objects.hashCode(this.intervention);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.interventionItemID);
+        hash = 37 * hash + Objects.hashCode(this.intervention);
         return hash;
     }
 
@@ -91,15 +91,12 @@ public abstract class InterventionItem implements Serializable{
             return false;
         }
         final InterventionItem other = (InterventionItem) obj;
-        if (!Objects.equals(this.itemID, other.itemID)) {
+        if (!Objects.equals(this.interventionItemID, other.interventionItemID)) {
             return false;
         }
         return Objects.equals(this.intervention, other.intervention);
     }
-
-    @Override
-    public String toString() {
-        return "InterventionItem{" + "itemID=" + itemID + ", intervention=" + intervention + ", note=" + note + '}';
-    }
+    
+    
     
 }
