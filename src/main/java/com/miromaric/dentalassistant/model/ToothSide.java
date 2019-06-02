@@ -32,14 +32,14 @@ public class ToothSide implements Serializable{
     private Long toothSideID;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothID",referencedColumnName = "toothID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothID",referencedColumnName = "toothID")
     @Basic(optional = false)
     private Tooth tooth;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "toothSideLabelID",referencedColumnName = "toothSideLabelID")
     @Basic(optional = false)
-    private ToothSideLabel label;
+    private ToothSideLabel sideLabel;
     
     @OneToMany(mappedBy = "toothSide")
     @Basic(optional = false)
@@ -51,7 +51,7 @@ public class ToothSide implements Serializable{
     public ToothSide(Long toothSideID, Tooth tooth, ToothSideLabel label, List<SideIntervention> sideInterventions) {
         this.toothSideID = toothSideID;
         this.tooth = tooth;
-        this.label = label;
+        this.sideLabel = label;
         this.sideInterventions = sideInterventions;
     }
 
@@ -72,11 +72,11 @@ public class ToothSide implements Serializable{
     }
 
     public ToothSideLabel getLabel() {
-        return label;
+        return sideLabel;
     }
 
     public void setLabel(ToothSideLabel label) {
-        this.label = label;
+        this.sideLabel = label;
     }
 
     public List<SideIntervention> getSideInterventions() {
@@ -111,7 +111,7 @@ public class ToothSide implements Serializable{
 
     @Override
     public String toString() {
-        return "ToothSide{" + "toothSideID=" + toothSideID + ", tooth=" + tooth + ", label=" + label + ", sideInterventions=" + sideInterventions + '}';
+        return "ToothSide{" + "toothSideID=" + toothSideID + ", tooth=" + tooth + ", label=" + sideLabel + ", sideInterventions=" + sideInterventions + '}';
     }
     
 }

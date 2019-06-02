@@ -1,6 +1,7 @@
 package com.miromaric.dentalassistant.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -37,6 +39,15 @@ public class Tooth implements Serializable{
     @JoinColumn(name = "toothLabelID", referencedColumnName = "toothLabelID")
     @Basic(optional = false)
     private ToothLabel toothLabel;
+    
+    @OneToMany(mappedBy = "tooth")
+    @Basic(optional = false)
+    private List<ToothRoot> toothRoots;
+    
+    @OneToMany(mappedBy = "tooth")
+    @Basic(optional = false)
+    private List<ToothSide> toothSides;
+    
 
     public Tooth() {
     }
@@ -69,6 +80,30 @@ public class Tooth implements Serializable{
 
     public void setLabel(ToothLabel label) {
         this.toothLabel = label;
+    }
+
+    public ToothLabel getToothLabel() {
+        return toothLabel;
+    }
+
+    public List<ToothRoot> getToothRoots() {
+        return toothRoots;
+    }
+
+    public List<ToothSide> getToothSides() {
+        return toothSides;
+    }
+
+    public void setToothLabel(ToothLabel toothLabel) {
+        this.toothLabel = toothLabel;
+    }
+
+    public void setToothRoots(List<ToothRoot> toothRoots) {
+        this.toothRoots = toothRoots;
+    }
+
+    public void setToothSides(List<ToothSide> toothSides) {
+        this.toothSides = toothSides;
     }
 
     @Override
