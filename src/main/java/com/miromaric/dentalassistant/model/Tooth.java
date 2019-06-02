@@ -48,6 +48,10 @@ public class Tooth implements Serializable{
     @Basic(optional = false)
     private List<ToothSide> toothSides;
     
+    @OneToMany(mappedBy = "tooth")
+    @Basic(optional = false)
+    private List<ToothIntervention> toothInterventions;
+    
 
     public Tooth() {
     }
@@ -106,6 +110,14 @@ public class Tooth implements Serializable{
         this.toothSides = toothSides;
     }
 
+    public List<ToothIntervention> getToothInterventions() {
+        return toothInterventions;
+    }
+
+    public void setToothInterventions(List<ToothIntervention> toothInterventions) {
+        this.toothInterventions = toothInterventions;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
