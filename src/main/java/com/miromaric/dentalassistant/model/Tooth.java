@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class Tooth implements Serializable{
     private Patient patient;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothLabelID", referencedColumnName = "toothLabelID")
+    @JoinColumn(name = "toothLabelID", referencedColumnName = "toothLabelID",insertable = false,updatable = false)
     @Basic(optional = false)
     private ToothLabel toothLabel;
     
@@ -74,16 +75,9 @@ public class Tooth implements Serializable{
         return patient;
     }
 
+    @JsonIgnore
     public void setPatient(Patient patient) {
         this.patient = patient;
-    }
-
-    public ToothLabel getLabel() {
-        return toothLabel;
-    }
-
-    public void setLabel(ToothLabel label) {
-        this.toothLabel = label;
     }
 
     public ToothLabel getToothLabel() {

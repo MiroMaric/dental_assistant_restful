@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -78,6 +79,7 @@ public class ToothRoot implements Serializable{
         this.rootLabel = rootLabel;
     }
 
+    @JsonIgnore
     public void setTooth(Tooth tooth) {
         this.tooth = tooth;
     }

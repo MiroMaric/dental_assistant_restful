@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -43,6 +44,7 @@ public class ToothIntervention extends InterventionItem implements Serializable{
         return tooth;
     }
 
+    @JsonIgnore
     public void setTooth(Tooth tooth) {
         this.tooth = tooth;
     }

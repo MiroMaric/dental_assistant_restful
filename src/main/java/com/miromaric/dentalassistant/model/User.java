@@ -29,29 +29,35 @@ public class User implements Serializable{
     @NotNull(message = "Korisničko ime je obavezno")
     @Size(min = 4,max = 20,message = "Korisničko ime mora imati 4 - 20 karaktera")
     private String username;
+    
     @Basic(optional = false)
     @Column(nullable = false,length = 20)
     @NotNull(message = "Šifra je obavezna")
     @Size(min = 6,max = 20,message = "Šifra mora imati 6-20 karaktera")
     private String password;
+    
     @Basic(optional = false)
     @Column(nullable = false)
     @NotNull(message = "E-pošta je obavezna")
     @Email(message = "E-pošta mora biti valida, e.g. me@mydomain.com")
     private String email;
+    
     @Basic(optional = false)
     @Column(nullable = false,length = 15)
     @NotNull(message = "Ime je obavezno")
     @Size(min=2,max=15,message = "Ime mora imati 2 - 15 karaktera")
     private String firstname;
+    
     @Basic(optional = false)
     @Column(nullable = false,length = 15)
     @Size(min=2,max=15,message = "Prezime mora imati 2 - 15 karaktera")
     @NotNull(message = "Prezime je obavezno")
     private String lastname;
+    
     @Column(length = 20)
     @Size(min=4,max=20,message = "Adresa mora imati 4 - 20 karaktera")
     private String address;
+    
     @Column(length = 15)
     @Size(min=10,max=10,message = "Telefon mora biti unet u ispravnom formatu")
     private String phone;

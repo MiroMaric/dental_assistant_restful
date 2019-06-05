@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -42,12 +43,11 @@ public class RootIntervention extends InterventionItem{
         return toothRoot;
     }
 
+    @JsonIgnore
     public void setToothRoot(ToothRoot toothRoot) {
         this.toothRoot = toothRoot;
     }
     
-    
-
     public ToothRootState getToothRootState() {
         return toothRootState;
     }

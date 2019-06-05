@@ -1,12 +1,9 @@
 package com.miromaric.dentalassistant.model;
 
-import com.miromaric.dentalassistant.deserializer.MyJsonDateDeserializer;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.json.bind.annotation.JsonbDateFormat;
-import javax.json.bind.annotation.JsonbTypeDeserializer;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,8 +26,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p")
-    ,
+    @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p"),
     @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient p WHERE p.patientID = :id")
 })
 public class Patient implements Serializable {
@@ -65,15 +61,11 @@ public class Patient implements Serializable {
     private String phone;
     
     @Temporal(TemporalType.DATE)
-    @JsonbDateFormat(value = "yyyy-MM-dd")
-    @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     private Date birthDate;
     
     @Column(nullable = false)
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
-    @JsonbDateFormat(value = "yyyy-MM-dd")
-    @JsonbTypeDeserializer(MyJsonDateDeserializer.class)
     @NotNull(message = "Datum kreiranja kartona je obavezan")
     private Date cardboardDate;
     

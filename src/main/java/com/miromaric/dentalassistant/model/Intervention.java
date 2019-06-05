@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -35,7 +34,7 @@ public class Intervention implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     @Basic(optional = false)
     private Long interventionID;
 
@@ -48,11 +47,10 @@ public class Intervention implements Serializable {
     @JoinColumn(name = "username", referencedColumnName = "username")
     @Basic(optional = false)
     private User user;
-    
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "intervention")
-    @JsonIgnore
-    private List<InterventionItem> items;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "intervention")
+    private List<InterventionItem> items;
+    
     private String note;
 
     public Intervention() {
@@ -64,6 +62,7 @@ public class Intervention implements Serializable {
         this.note = note;
         this.user = user;
     }
+
     public Intervention(Date date, String note, User user) {
         this.date = date;
         this.note = note;
@@ -109,7 +108,7 @@ public class Intervention implements Serializable {
     public void setItems(List<InterventionItem> items) {
         this.items = items;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;

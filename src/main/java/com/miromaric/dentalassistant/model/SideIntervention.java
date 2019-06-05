@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -43,6 +44,7 @@ public class SideIntervention extends InterventionItem{
         return toothSide;
     }
 
+    @JsonIgnore
     public void setToothSide(ToothSide toothSide) {
         this.toothSide = toothSide;
     }
