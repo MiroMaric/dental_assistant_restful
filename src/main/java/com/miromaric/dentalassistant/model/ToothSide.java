@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,16 +34,16 @@ public class ToothSide implements Serializable{
     private Long toothSideID;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothID",referencedColumnName = "toothID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothID",referencedColumnName = "toothID")
     @Basic(optional = false)
     private Tooth tooth;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothSideLabelID",referencedColumnName = "toothSideLabelID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothSideLabelID",referencedColumnName = "toothSideLabelID")
     @Basic(optional = false)
     private ToothSideLabel sideLabel;
     
-    @OneToMany(mappedBy = "toothSide")
+    @OneToMany(mappedBy = "toothSide",fetch = FetchType.EAGER)
     @Basic(optional = false)
     private List<SideIntervention> sideInterventions;
 
@@ -73,12 +74,12 @@ public class ToothSide implements Serializable{
         this.tooth = tooth;
     }
 
-    public ToothSideLabel getLabel() {
+    public ToothSideLabel getSideLabel() {
         return sideLabel;
     }
 
-    public void setLabel(ToothSideLabel label) {
-        this.sideLabel = label;
+    public void setSideLabel(ToothSideLabel sideLabel) {
+        this.sideLabel = sideLabel;
     }
 
     public List<SideIntervention> getSideInterventions() {

@@ -95,8 +95,9 @@ public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<Resource
             }
             return resource;
         } finally {
-            if(em.getTransaction().isActive())
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
+            }
             em.close();
         }
     }
