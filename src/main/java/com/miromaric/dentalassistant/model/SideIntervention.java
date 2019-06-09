@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class SideIntervention extends InterventionItem{
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothSideID",referencedColumnName = "toothSideID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothSideID",referencedColumnName = "toothSideID")
     @Basic(optional = false)
     private ToothSide toothSide;
     

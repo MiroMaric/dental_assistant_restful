@@ -33,7 +33,7 @@ public abstract class InterventionItem implements Serializable{
     
     //@Id
     @ManyToOne(optional = false)
-    @JoinColumn(name = "interventionID", referencedColumnName = "interventionID", insertable = false, updatable = false)
+    @JoinColumn(name = "interventionID", referencedColumnName = "interventionID")
     @Basic(optional = false)
     protected Intervention intervention;
     
