@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
  */
 public class ToothDto implements Serializable{
     
-    @NotNull
     private Long patientID;
     @NotNull
     private Long toothLabelID;
