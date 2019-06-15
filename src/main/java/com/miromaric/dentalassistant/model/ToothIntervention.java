@@ -17,18 +17,33 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tooth_intervention")
 @NamedQueries({
-    @NamedQuery(name = "ToothIntervention.getAll", query = "SELECT ti FROM ToothIntervention ti"),
-    @NamedQuery(name = "ToothIntervention.getById", query = "SELECT ti FROM ToothIntervention ti WHERE ti.interventionItemID = :id")
+//    @NamedQuery(name = "ToothIntervention.getAll", query = "SELECT ti FROM ToothIntervention ti"),
+//    @NamedQuery(name = "ToothIntervention.getById", query = "SELECT ti FROM ToothIntervention ti WHERE ti.interventionItemID = :id"),
+    @NamedQuery(
+            name = "ToothIntervention.getAll", 
+            query = "SELECT ti "
+                    + "FROM ToothIntervention ti "
+                    + "WHERE ti.tooth.patient.patientID = :patientId "
+                    + "AND ti.tooth.toothID = :toothId"
+    ),
+    @NamedQuery(
+            name = "ToothIntervention.getOne", 
+            query = "SELECT ti "
+                    + "FROM ToothIntervention ti "
+                    + "WHERE ti.tooth.patient.patientID = :patientId "
+                    + "AND ti.tooth.toothID = :toothId "
+                    + "AND ti.interventionItemID = :interventionItemId"
+    )
 })
 public class ToothIntervention extends InterventionItem implements Serializable{
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothID",referencedColumnName = "toothID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothID",referencedColumnName = "toothID")
     @Basic(optional = false)
     private Tooth tooth;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothStateID",referencedColumnName = "toothStateID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothStateID",referencedColumnName = "toothStateID")
     @Basic(optional = false)
     private ToothState toothState;
 
