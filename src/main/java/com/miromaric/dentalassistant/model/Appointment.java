@@ -35,8 +35,8 @@ public class Appointment implements Serializable {
     Privremeno resen problem u metodi save
     */
     @Id
-    //zakomentarisi posle
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //(odkomentarisati prilikom kreiranja seme baze podataka)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentID;
     @Id
     @Basic(optional = false)
