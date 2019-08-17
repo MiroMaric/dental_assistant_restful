@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,15 +42,15 @@ public class Tooth implements Serializable{
     @Basic(optional = false)
     private ToothLabel toothLabel;
     
-    @OneToMany(mappedBy = "tooth")
+    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
     @Basic(optional = false)
     private List<ToothRoot> toothRoots;
     
-    @OneToMany(mappedBy = "tooth")
+    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
     @Basic(optional = false)
     private List<ToothSide> toothSides;
     
-    @OneToMany(mappedBy = "tooth")
+    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
     @Basic(optional = false)
     private List<ToothIntervention> toothInterventions;
     

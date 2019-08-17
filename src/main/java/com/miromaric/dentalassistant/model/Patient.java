@@ -8,6 +8,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -74,7 +75,7 @@ public class Patient implements Serializable {
     @NotNull(message = "Status kartona je obavezan")
     private boolean deactivated;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.EAGER)
     private List<Tooth> teeth;
 
     public Patient() {
@@ -217,5 +218,4 @@ public class Patient implements Serializable {
     public String toString() {
         return "Patient{" + "patientID=" + patientID + '}';
     }
-
 }

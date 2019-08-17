@@ -119,7 +119,6 @@ public class AppointmentDaoImpl extends AbstractDAO<Appointment, Long> {
         try {
             return (Appointment) em.createNamedQuery("Appointment.getById").setParameter("appointmentID", id).getSingleResult();
         } catch (NoResultException e) {
-            em.close();
             return null;
         }
     }
