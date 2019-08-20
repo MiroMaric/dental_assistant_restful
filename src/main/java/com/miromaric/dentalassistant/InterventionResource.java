@@ -7,6 +7,7 @@ import com.miromaric.dentalassistant.myresponse.Status;
 import com.miromaric.dentalassistant.service.InterventionService;
 import com.miromaric.dentalassistant.service.impl.InterventionServiceImpl;
 import com.miromaric.dentalassistant.service.mapper.impl.InterventionMapperImpl;
+import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -17,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,8 +33,16 @@ public class InterventionResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse getAll(){
-        List<Intervention> interventions =  service.getAll();
+    public MyResponse getAll(
+            @QueryParam("fromDate") Long fromDate,
+            @QueryParam("toDate") Long toDate,
+            @QueryParam("dentist") String username
+    ){
+        System.out.println("\n\n\n" + fromDate);
+        System.out.println(toDate);
+        System.out.println(username);
+        List<Intervention> interventions = 
+                service.getFiltered(fromDate==null?null:new Date(fromDate), toDate==null?null:new Date(toDate),username);
         return new MyResponse(Status.SUCCESS, interventions, null);
     }
     
