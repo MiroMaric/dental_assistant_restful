@@ -6,10 +6,23 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Implementrira filter za filtriranje liste intervencia.
+ * Odbacuju se sve intervencije koji su zakazane pre navedenog datuma.
+ * @author Miro Marić
+ */
 public class FromDateInterventionsFilter extends FilterHandler<Intervention> {
 
+    /**
+     * Datum pre kojeg se odbacuju izvršene intervencije.
+     */
     private final Date date;
 
+    /**
+     * 
+     * @param date Datum pre kojeg se odbacuju intervencije
+     * @param successor Sledeći filter objekat u lancu povezanih filtera
+     */
     public FromDateInterventionsFilter(Date date, FilterHandler successor) {
         super(successor);
         this.date = date;

@@ -5,10 +5,24 @@ import com.miromaric.dentalassistant.service.impl.filter.FilterHandler;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Implementrira filter za filtriranje liste zakazanih termina.
+ * Filtriranje se vrši po jedinistvenom identifikatoru pacijenta.
+ * @author Miro Marić
+ * @see Appointment
+ */
 public final class PatientAppointmentsFilter extends FilterHandler<Appointment>{
 
+    /**
+     * Jedinsveni identifikator pacijenta po kome se vrši filtriranje
+     */
     private final Long patientId;
 
+    /**
+     * 
+     * @param patientId Jedinsveni identifikator pacijenta po kome se vrši filtriranje
+     * @param successor Sledeći filter objekat u lancu povezanih filtera
+     */
     public PatientAppointmentsFilter(Long patientId, FilterHandler successor) {
         super(successor);
         this.patientId = patientId;

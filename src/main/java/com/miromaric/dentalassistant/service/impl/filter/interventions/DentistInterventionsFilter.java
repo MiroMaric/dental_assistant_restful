@@ -4,11 +4,22 @@ import com.miromaric.dentalassistant.model.Intervention;
 import com.miromaric.dentalassistant.service.impl.filter.FilterHandler;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * Implementrira filter za filtriranje liste intervencija.
+ * Filtriranje se vrši po korisničkom imenu doktora.
+ * @author Miro Marić
+ */
 public final class DentistInterventionsFilter extends FilterHandler<Intervention> {
 
+    /**
+     * Korisničko ime doktora.
+     */
     private final String username;
 
+    /**
+     * @param username Korisničko ime doktora
+     * @param successor Sledeći filter objekat u lancu povezanih filtera
+     */
     public DentistInterventionsFilter(String username, FilterHandler successor) {
         super(successor);
         this.username = username;

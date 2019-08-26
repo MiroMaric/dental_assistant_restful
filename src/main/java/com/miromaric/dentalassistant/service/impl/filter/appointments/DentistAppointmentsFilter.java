@@ -4,11 +4,23 @@ import com.miromaric.dentalassistant.model.Appointment;
 import com.miromaric.dentalassistant.service.impl.filter.FilterHandler;
 import java.util.Iterator;
 import java.util.List;
+/**
+ * Implementrira filter za filtriranje liste zakazanih termina.
+ * Filtriranje se vrši po korisničkom imenu doktora.
+ * @author Miro Marić
+ * @see Appointment
+ */
+public final class DentistAppointmentsFilter extends FilterHandler<Appointment>{
 
-public class DentistAppointmentsFilter extends FilterHandler<Appointment>{
-
+    /**
+     * Korisničko ime doktora.
+     */
     private final String username;
 
+    /**
+     * @param username Korisničko ime doktora
+     * @param successor Sledeći filter objekat u lancu povezanih filtera
+     */
     public DentistAppointmentsFilter(String username, FilterHandler successor) {
         super(successor);
         this.username = username;
