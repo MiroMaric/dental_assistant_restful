@@ -1,5 +1,6 @@
-package com.miromaric.dentalassistant.service.impl.filter.intervention;
+package com.miromaric.dentalassistant.service.impl.filter.interventions;
 
+import com.miromaric.dentalassistant.service.impl.filter.interventions.FromDateInterventionsFilter;
 import com.miromaric.dentalassistant.model.Intervention;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,19 +11,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FromDateFilterTest {
+public class FromDateInterventionsFilterTest {
 
-    private FromDateFilter filter;
+    private FromDateInterventionsFilter filter;
     private List<Intervention> dummyList;
 
     @Before
     public void setUp() {
         dummyList = new ArrayList<>(Arrays.asList(
-                getDummyInterventionWithExplicitDate(new Date(5)),
-                getDummyInterventionWithExplicitDate(new Date(100)),
-                getDummyInterventionWithExplicitDate(new Date(500)),
-                getDummyInterventionWithExplicitDate(new Date(-10)),
-                getDummyInterventionWithExplicitDate(new Date(-50))
+                getDummyInterventionWithExplicitDate(new Long(1),new Date(5)),
+                getDummyInterventionWithExplicitDate(new Long(2),new Date(100)),
+                getDummyInterventionWithExplicitDate(new Long(3),new Date(500)),
+                getDummyInterventionWithExplicitDate(new Long(4),new Date(-10)),
+                getDummyInterventionWithExplicitDate(new Long(5),new Date(-50))
         ));
     }
 
@@ -35,8 +36,8 @@ public class FromDateFilterTest {
     @Test
     public void testShouldBeRuturnFilteredList() {
         long timeInMilliseconds = 100;
-        filter = new FromDateFilter(new Date(timeInMilliseconds), null);
-        List<Intervention> filteredInterventions = filter.handleRequest(dummyList);
+        filter = new FromDateInterventionsFilter(new Date(timeInMilliseconds), null);
+        List<Intervention> filteredInterventions = filter.filter(dummyList);
         Assert.assertEquals(2,filteredInterventions.size());
         for(Intervention i:filteredInterventions){
             Assert.assertTrue(i.getDate().getTime() >= timeInMilliseconds );
@@ -45,20 +46,21 @@ public class FromDateFilterTest {
     
     @Test
     public void testShouldBeReturnUnfilteredList() {
-        filter = new FromDateFilter(null, null);
-        List<Intervention> filteredInterventions = filter.handleRequest(dummyList);
+        filter = new FromDateInterventionsFilter(null, null);
+        List<Intervention> filteredInterventions = filter.filter(dummyList);
         Assert.assertArrayEquals(dummyList.toArray(), filteredInterventions.toArray());
 
     }
     
     @Test(expected = RuntimeException.class)
     public void testShouldBeThrownRuntimeException() {
-        filter = new FromDateFilter(null, null);
-        List<Intervention> filteredInterventions = filter.handleRequest(null);
+        filter = new FromDateInterventionsFilter(null, null);
+        List<Intervention> filteredInterventions = filter.filter(null);
     }
 
-    private Intervention getDummyInterventionWithExplicitDate(Date date) {
+    private Intervention getDummyInterventionWithExplicitDate(Long interventionId,Date date) {
         Intervention i = new Intervention();
+        i.setInterventionID(interventionId);
         i.setInterventionID(date.getTime());
         i.setDate(date);
         return i;

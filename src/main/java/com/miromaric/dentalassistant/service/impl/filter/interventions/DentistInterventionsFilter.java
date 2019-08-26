@@ -1,24 +1,21 @@
-package com.miromaric.dentalassistant.service.impl.filter.intervention;
+package com.miromaric.dentalassistant.service.impl.filter.interventions;
 
 import com.miromaric.dentalassistant.model.Intervention;
 import com.miromaric.dentalassistant.service.impl.filter.FilterHandler;
 import java.util.Iterator;
 import java.util.List;
 
-public class DentistFilter extends FilterHandler<Intervention> {
+public final class DentistInterventionsFilter extends FilterHandler<Intervention> {
 
     private final String username;
 
-    public DentistFilter(String username, FilterHandler successor) {
+    public DentistInterventionsFilter(String username, FilterHandler successor) {
         super(successor);
         this.username = username;
     }
 
     @Override
-    public List<Intervention> handleRequest(List<Intervention> interventions) {
-        if(interventions==null){
-            throw new RuntimeException("Interventions cannot be null");
-        }
+    protected List<Intervention> concreteFilter(List<Intervention> interventions) {
         if(username!=null){
             for(Iterator<Intervention> iter = interventions.listIterator();iter.hasNext();){
                 if(!iter.next().getUser().getUsername().equals(this.username)){
@@ -26,7 +23,7 @@ public class DentistFilter extends FilterHandler<Intervention> {
                 }
             }
         }
-        return successor==null?interventions:successor.handleRequest(interventions);
+        return interventions;
     }
 
 }
