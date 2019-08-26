@@ -173,7 +173,7 @@ public class Intervention implements Serializable {
     /**
      * Vraća stavke intervencije.
      *
-     * @return
+     * @return Stavke intervencije
      */
     public List<InterventionItem> getItems() {
         return items;
@@ -181,7 +181,7 @@ public class Intervention implements Serializable {
     /**
      * Postavlja stavke intervencije.
      *
-     * @param items stavke intervencije
+     * @param items Stavke intervencije
      */
     public void setItems(List<InterventionItem> items) {
         this.items = items;

@@ -15,8 +15,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Klasa predstavlja stanje u kome se može nalaziti koren zuba.
  *
- * @author MikoPC
+ * @author Miro Marić
+ * @see ToothRoot
+ * @see RootIntervention
+ * 
  */
 @Entity
 @Table(name = "tooth_root_state")
@@ -25,29 +29,47 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ToothRootState.getById", query = "SELECT trs FROM ToothRootState trs WHERE trs.toothRootStateID = :id")
 })
 public class ToothRootState implements Serializable{
+    /**
+     * Jedinstveni identifikator stanja korena.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @Basic(optional = false)
     private Long toothRootStateID;
     
+    /**
+     * Naziv stanja.
+     */
     @Column(nullable = false,length = 20)
     @Basic(optional = false)
     @NotNull(message = "Naziv status je obavezan")
     @Size(max = 20,message = "Naziv može imati najviše 20 karaktera")
     private String name;
     
+    /**
+     * Boja stanja(grafička reprezentacija).
+     */
     @Column(nullable = false,length = 20)
     @Basic(optional = false)
     @NotNull(message = "Boja statusa je obavezna")
     @Size(max = 20,message = "Naziv boje može imati najviše 20 karaktera")
     private String color;
-    
+    /**
+     * Opis stanja.
+     */
     private String description;
 
     public ToothRootState() {
     }
 
+    /**
+     * 
+     * @param toothRootStateID Jedinstveni identifikator stanja korena
+     * @param name Naziv stanja
+     * @param description Opis stanja
+     * @param color Boja stanja
+     */
     public ToothRootState(Long toothRootStateID, String name, String description, String color) {
         this.toothRootStateID = toothRootStateID;
         this.name = name;
@@ -55,34 +77,66 @@ public class ToothRootState implements Serializable{
         this.color = color;
     }
 
+    /**
+     * Vraća jedinstveni identifikator stanja korena.
+     * @return Jedinstveni identifikator stanja korena
+     */
     public Long getToothRootStateID() {
         return toothRootStateID;
     }
 
+    /**
+     * Postavlja jedinstveni identifikator stanja korena.
+     * @param toothRootStateID Jedinstveni identifikator stanja korena
+     */
     public void setToothRootStateID(Long toothRootStateID) {
         this.toothRootStateID = toothRootStateID;
     }
 
+    /**
+     * Vraća naziv stanja.
+     * @return Naziv stanja.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Postavlja naziv stanja.
+     * @param name Naziv stanja
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Vraća opis stanja.
+     * @return Opis stanja
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Postavlja opis stanja.
+     * @param description Opis stanja.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Vraća boju stanja.
+     * @return Boja stanja
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Postavlja boju stanja.
+     * @param color Boja stanja
+     */
     public void setColor(String color) {
         this.color = color;
     }

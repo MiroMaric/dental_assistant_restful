@@ -15,8 +15,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Klasa predstavlja stanje u kome se može nalaziti zub.
  *
- * @author MikoPC
+ * @author Miro Marić
+ * @see Tooth
+ * @see ToothIntervention
+ * 
  */
 @Entity
 @Table(name = "tooth_state")
@@ -26,29 +30,48 @@ import javax.validation.constraints.Size;
 })
 public class ToothState implements Serializable{
 
+    /**
+     * Jedinstveni identifikator stanja.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @Basic(optional = false)
     private Long toothStateID;
     
+    /**
+     * Naziv stanja zuba.
+     */
     @Column(nullable = false,length = 20)
     @Basic(optional = false)
     @NotNull(message = "Naziv status je obavezan")
     @Size(max = 20,message = "Naziv može imati najviše 20 karaktera")
     private String name;
     
+    /**
+     * Boja stanja(grafička reprezentacija).
+     */
     @Column(nullable = false,length = 20)
     @Basic(optional = false)
     @NotNull(message = "Boja statusa je obavezna")
     @Size(max = 20,message = "Naziv boje može imati najviše 20 karaktera")
     private String color;
     
+    /**
+     * Opis stanja.
+     */
     private String description;
 
     public ToothState() {
     }
 
+    /**
+     * 
+     * @param toothStateID Jedinstveni identifikator stanja
+     * @param name Naziv stanja zuba
+     * @param description Opis stanja
+     * @param color Boja stanja
+     */
     public ToothState(Long toothStateID, String name, String description, String color) {
         this.toothStateID = toothStateID;
         this.name = name;
@@ -56,34 +79,66 @@ public class ToothState implements Serializable{
         this.color = color;
     }
 
+    /**
+     * Vraća jedinstveni identifikator stanja.
+     * @return Jedinstveni identifikator stanja
+     */
     public Long getToothStateID() {
         return toothStateID;
     }
 
+    /**
+     * Postavlja jedinstveni identifikator stanja.
+     * @param toothStateID Jedinstveni identifikator stanja.
+     */
     public void setToothStateID(Long toothStateID) {
         this.toothStateID = toothStateID;
     }
 
+    /**
+     * Vraća naziv stanja zuba.
+     * @return Naziv stanja zuba
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Postavlja naziv stanja zuba.
+     * @param name Naziv stanja zuba
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Vraća opis stanja.
+     * @return Opis stanja
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Postavlja opis stanja.
+     * @param description Opis stanja
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Vraća boju stanja.
+     * @return Boja stanja
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Postavlja boju stanja.
+     * @param color Boja stanja
+     */
     public void setColor(String color) {
         this.color = color;
     }
