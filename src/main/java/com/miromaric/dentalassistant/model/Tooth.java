@@ -29,11 +29,11 @@ public class Tooth implements Serializable{
     
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long toothID;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "patientID", referencedColumnName = "patientID", insertable = false, updatable = false)
+    @JoinColumn(name = "patientID", referencedColumnName = "patientID", insertable = true , updatable = true)
     @Basic(optional = false)
     private Patient patient;
     

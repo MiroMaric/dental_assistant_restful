@@ -75,7 +75,7 @@ public class Patient implements Serializable {
     @NotNull(message = "Status kartona je obavezan")
     private boolean deactivated;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Tooth> teeth;
 
     public Patient() {

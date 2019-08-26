@@ -7,9 +7,9 @@ import com.miromaric.dentalassistant.model.Appointment;
 import com.miromaric.dentalassistant.model.Intervention;
 import com.miromaric.dentalassistant.service.InterventionService;
 import com.miromaric.dentalassistant.service.impl.filter.FilterHandler;
-import com.miromaric.dentalassistant.service.impl.filter.intervention.DentistFilter;
-import com.miromaric.dentalassistant.service.impl.filter.intervention.FromDateFilter;
-import com.miromaric.dentalassistant.service.impl.filter.intervention.ToDateFilter;
+import com.miromaric.dentalassistant.service.impl.filter.interventions.DentistInterventionsFilter;
+import com.miromaric.dentalassistant.service.impl.filter.interventions.FromDateInterventionsFilter;
+import com.miromaric.dentalassistant.service.impl.filter.interventions.ToDateInterventionsFilter;
 import java.util.Date;
 import java.util.List;
 
@@ -60,10 +60,10 @@ public class InterventionServiceImpl implements InterventionService {
 
     @Override
     public List<Intervention> getFiltered(Date fromDate, Date toDate, String username) {
-        return (new FromDateFilter(fromDate,
-                new ToDateFilter(toDate,
-                        new DentistFilter(username, null))))
-                .handleRequest(dao.getAll());
+        return (new FromDateInterventionsFilter(fromDate,
+                new ToDateInterventionsFilter(toDate,
+                        new DentistInterventionsFilter(username, null))))
+                .filter(dao.getAll());
     }
 
 }

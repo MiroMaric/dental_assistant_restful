@@ -7,10 +7,6 @@ import com.miromaric.dentalassistant.model.Patient;
 import com.miromaric.dentalassistant.service.PatientService;
 import java.util.List;
 
-/**
- *
- * @author MikoPC
- */
 public class PatientServiceImpl implements PatientService{
 
     private final DAO<Patient, Long> dao = new PatientDaoImpl();
