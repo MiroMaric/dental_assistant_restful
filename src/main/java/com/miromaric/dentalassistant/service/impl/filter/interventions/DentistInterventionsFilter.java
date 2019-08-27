@@ -8,6 +8,7 @@ import java.util.List;
  * Implementrira filter za filtriranje liste intervencija.
  * Filtriranje se vrši po korisničkom imenu doktora.
  * @author Miro Marić
+ * @see Intervention
  */
 public final class DentistInterventionsFilter extends FilterHandler<Intervention> {
 

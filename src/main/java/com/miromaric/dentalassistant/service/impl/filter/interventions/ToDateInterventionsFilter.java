@@ -11,6 +11,7 @@ import java.util.List;
  * intervencije koje su zakazane posle navedenog datuma.
  *
  * @author Miro Marić
+ * @see Intervention
  */
 public final class ToDateInterventionsFilter extends FilterHandler<Intervention> {
 

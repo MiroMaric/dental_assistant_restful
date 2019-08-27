@@ -27,6 +27,7 @@ import javax.ws.rs.core.Response;
  * @author Miro Marić
  * @see Tooth
  * @see ToothDto
+ * @see MyResponse
  */
 @Path("patients/{patientId}/teeth")
 public class ToothResource {

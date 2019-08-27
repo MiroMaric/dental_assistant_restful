@@ -8,8 +8,9 @@ import java.util.List;
 
 /**
  * Implementrira filter za filtriranje liste intervencia.
- * Odbacuju se sve intervencije koji su zakazane pre navedenog datuma.
+ * Odbacuju se sve intervencije koje su zakazane pre navedenog datuma.
  * @author Miro Marić
+ * @see Intervention
  */
 public class FromDateInterventionsFilter extends FilterHandler<Intervention> {
 
