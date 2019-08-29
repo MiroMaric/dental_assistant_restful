@@ -30,7 +30,7 @@ public class RootIntervention extends InterventionItem {
      * Koren zuba na kome se vrši intervencija.
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothRootID", referencedColumnName = "toothRootID", insertable = false, updatable = false)
+    @JoinColumn(name = "toothRootID", referencedColumnName = "toothRootID")
     @Basic(optional = false)
     private ToothRoot toothRoot;
 

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -46,6 +47,7 @@ public class ToothRoot implements Serializable{
      */
     @ManyToOne(optional = false)
     @JoinColumn(name = "toothID",referencedColumnName = "toothID")
+    @Basic(optional = false)
     private Tooth tooth;
     
     /**
@@ -59,7 +61,7 @@ public class ToothRoot implements Serializable{
     /**
      * Intervencije na korenu.
      */
-    @OneToMany(mappedBy = "toothRoot",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toothRoot",fetch = FetchType.LAZY)
     @Basic(optional = false)
     private List<RootIntervention> rootInterventions;
 

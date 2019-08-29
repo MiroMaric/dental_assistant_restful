@@ -55,6 +55,14 @@ public class ToothSideLabel implements Serializable {
 
     public ToothSideLabel() {
     }
+    
+    /**
+     * 
+     * @param toothSideLabelID Jedinstveni identifikator oznake strane zuba
+     */
+    public ToothSideLabel(Long toothSideLabelID) {
+        this.toothSideLabelID = toothSideLabelID;
+    }
 
     /**
      * 

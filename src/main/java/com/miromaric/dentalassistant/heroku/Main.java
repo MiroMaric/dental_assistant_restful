@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.heroku;
 
+import com.miromaric.dentalassistant.persistence.MyPersistence;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 

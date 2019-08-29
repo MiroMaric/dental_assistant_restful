@@ -1,5 +1,6 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +65,7 @@ public class Intervention implements Serializable {
      * Stavke intervencije.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "intervention")
+    @JsonIgnore
     private List<InterventionItem> items;
 
     /**
@@ -72,6 +74,14 @@ public class Intervention implements Serializable {
     private String note;
 
     public Intervention() {
+    }
+
+    /**
+     * 
+     * @param interventionID Jedinstveni identifikator intervencije
+     */
+    public Intervention(Long interventionID) {
+        this.interventionID = interventionID;
     }
 
     /**

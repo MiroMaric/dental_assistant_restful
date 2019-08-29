@@ -1,6 +1,8 @@
 package com.miromaric.dentalassistant;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.miromaric.dentalassistant.model.Patient;
+import com.miromaric.dentalassistant.model.json_view.JsonViews;
 import com.miromaric.dentalassistant.myresponse.MyResponse;
 import com.miromaric.dentalassistant.myresponse.Status;
 import com.miromaric.dentalassistant.service.PatientService;
@@ -40,6 +42,7 @@ public class PatientResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @JsonView(JsonViews.Flat.class)
     public MyResponse getAll() {
         List<Patient> patients = service.getAll();
         return new MyResponse(Status.SUCCESS, patients, null);
@@ -55,8 +58,14 @@ public class PatientResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @JsonView(JsonViews.Deep.class)
     public MyResponse getOne(@PathParam("id") Long id) {
         Patient patient = service.getOne(id);
+        System.out.println("----------------------------------------------------------\n\n");
+        System.out.println(patient.getTeeth().size());
+        System.out.println(patient.getTeeth().get(0).getToothRoots().size());
+        System.out.println(patient.getTeeth().get(0).getToothSides().size());
+        System.out.println("\n\n----------------------------------------------------------");
         return new MyResponse(Status.SUCCESS, patient, null);
     }
 
@@ -70,6 +79,7 @@ public class PatientResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @JsonView(JsonViews.Flat.class)
     public Response save(@Valid Patient patient) {
         service.save(patient);
         return Response.status(Response.Status.CREATED).entity(new MyResponse(Status.SUCCESS, patient, null)).build();
@@ -85,6 +95,7 @@ public class PatientResource {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @JsonView(JsonViews.Flat.class)
     public MyResponse remove(@PathParam("id") Long id) {
         Patient patient = service.remove(id);
         return new MyResponse(Status.SUCCESS, patient, null);
@@ -102,6 +113,7 @@ public class PatientResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
+    @JsonView(JsonViews.Flat.class)
     public MyResponse update(@PathParam("id") Long id, @Valid Patient patient) {
         Patient uPatient = service.update(id, patient);
         return new MyResponse(Status.SUCCESS, uPatient, null);

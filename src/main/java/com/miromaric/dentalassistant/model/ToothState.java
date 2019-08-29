@@ -64,6 +64,13 @@ public class ToothState implements Serializable{
 
     public ToothState() {
     }
+    /**
+     * 
+     * @param toothStateID Jedinstveni identifikator stanja
+     */
+    public ToothState(Long toothStateID) {
+        this.toothStateID = toothStateID;
+    }
 
     /**
      * 

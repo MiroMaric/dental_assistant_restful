@@ -1,5 +1,7 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.miromaric.dentalassistant.model.json_view.JsonViews;
 import com.miromaric.dentalassistant.model.pk.AppointmentPK;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +31,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Appointment.getAll", query = "SELECT a FROM Appointment a"),
     @NamedQuery(name = "Appointment.getById", query = "SELECT a FROM Appointment a WHERE a.appointmentID = :appointmentID")
 })
+@JsonView(JsonViews.Flat.class)
 public class Appointment implements Serializable {
 
     /*
@@ -76,6 +79,7 @@ public class Appointment implements Serializable {
     /**
      * Napomena uz zakazani termin.
      */
+    @JsonView(JsonViews.Flat.class)
     private String description;
 
     public Appointment() {

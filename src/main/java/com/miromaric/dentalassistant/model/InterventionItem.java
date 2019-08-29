@@ -92,7 +92,7 @@ public abstract class InterventionItem implements Serializable {
      *
      * @return Intervencija
      */
-    @JsonIgnore
+    //@JsonIgnore
     public Intervention getIntervention() {
         return intervention;
     }

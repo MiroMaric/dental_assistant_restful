@@ -1,5 +1,7 @@
 package com.miromaric.dentalassistant.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.miromaric.dentalassistant.model.json_view.JsonViews;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Patient.getAll", query = "SELECT p FROM Patient p"),
     @NamedQuery(name = "Patient.getById", query = "SELECT p FROM Patient p WHERE p.patientID = :id")
 })
+@JsonView(JsonViews.Flat.class)
 public class Patient implements Serializable {
 
     /**
@@ -103,7 +106,8 @@ public class Patient implements Serializable {
     /**
      * Zubi pacijenta
      */
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.LAZY,orphanRemoval = true)
+    @JsonView(JsonViews.Deep.class)
     private List<Tooth> teeth;
 
     public Patient() {

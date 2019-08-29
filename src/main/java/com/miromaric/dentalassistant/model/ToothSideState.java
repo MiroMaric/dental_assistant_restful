@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
  * @see Tooth
  * @see SideIntervention
  * @see ToothSideLabel
- * 
+ *
  */
 @Entity
 @Table(name = "tooth_side_state")
@@ -29,7 +29,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ToothSideState.getAll", query = "SELECT tss FROM ToothSideState tss"),
     @NamedQuery(name = "ToothSideState.getById", query = "SELECT tss FROM ToothSideState tss WHERE tss.toothSideStateID = :id")
 })
-public class ToothSideState implements Serializable{
+public class ToothSideState implements Serializable {
+
     /**
      * Jedinstveni identifikator stanja.
      */
@@ -38,25 +39,25 @@ public class ToothSideState implements Serializable{
     @Column(nullable = false)
     @Basic(optional = false)
     private Long toothSideStateID;
-    
+
     /**
      * Naziv stanja.
      */
-    @Column(nullable = false,length = 20)
+    @Column(nullable = false, length = 20)
     @Basic(optional = false)
     @NotNull(message = "Naziv status je obavezan")
-    @Size(max = 20,message = "Naziv može imati najviše 20 karaktera")
+    @Size(max = 20, message = "Naziv može imati najviše 20 karaktera")
     private String name;
-    
+
     /**
      * Boja stanja(Grafička reprezentacija).
      */
-    @Column(nullable = false,length = 20)
+    @Column(nullable = false, length = 20)
     @Basic(optional = false)
     @NotNull(message = "Boja statusa je obavezna")
-    @Size(max = 20,message = "Naziv boje može imati najviše 20 karaktera")
+    @Size(max = 20, message = "Naziv boje može imati najviše 20 karaktera")
     private String color;
-    
+
     /**
      * Opis stanja strane zuba.
      */
@@ -67,6 +68,14 @@ public class ToothSideState implements Serializable{
 
     /**
      * 
+     * @param toothSideStateID Jedinstveni identifikator stanja
+     */
+    public ToothSideState(Long toothSideStateID) {
+        this.toothSideStateID = toothSideStateID;
+    }
+
+    /**
+     *
      * @param toothSideStateID Jedinstveni identifikator stanja
      * @param name Naziv stanja
      * @param description Opis stanja strane zuba
@@ -81,6 +90,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Vraća jedinstveni identifikator stanja.
+     *
      * @return Jedinstveni identifikator stanja
      */
     public Long getToothSideStateID() {
@@ -89,6 +99,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Postavlja jedinstveni identifikator stanja.
+     *
      * @param toothSideStateID Jedinstveni identifikator stanja
      */
     public void setToothSideStateID(Long toothSideStateID) {
@@ -97,6 +108,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Vraća naziv stanja.
+     *
      * @return Naziv stanja
      */
     public String getName() {
@@ -105,6 +117,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Postavlja naziv stanja.
+     *
      * @param name Naziv stanja
      */
     public void setName(String name) {
@@ -113,6 +126,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Vraća opis stanja strane zuba.
+     *
      * @return Opis stanja strane zuba
      */
     public String getDescription() {
@@ -121,6 +135,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Postavlja opis stanja strane zuba.
+     *
      * @param description Opis stanja strane zuba
      */
     public void setDescription(String description) {
@@ -129,6 +144,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Vraća boju stanja.
+     *
      * @return Boja stanja
      */
     public String getColor() {
@@ -137,6 +153,7 @@ public class ToothSideState implements Serializable{
 
     /**
      * Postavlja Boju stanja.
+     *
      * @param color Boja stanja
      */
     public void setColor(String color) {
@@ -172,6 +189,5 @@ public class ToothSideState implements Serializable{
     public String toString() {
         return "ToothSideState{" + "toothSideStateID=" + toothSideStateID + ", name=" + name + ", description=" + description + ", color=" + color + '}';
     }
-    
-    
+
 }

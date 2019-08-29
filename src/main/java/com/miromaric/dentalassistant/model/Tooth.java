@@ -1,10 +1,12 @@
 package com.miromaric.dentalassistant.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,14 +40,14 @@ public class Tooth implements Serializable{
      */
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long toothID;
     
     /**
      * Pacijent.
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "patientID", referencedColumnName = "patientID", insertable = true , updatable = true)
+    @JoinColumn(name = "patientID", referencedColumnName = "patientID")
     @Basic(optional = false)
     private Patient patient;
     
@@ -53,28 +55,27 @@ public class Tooth implements Serializable{
      * Oznaka zuba.
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothLabelID", referencedColumnName = "toothLabelID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothLabelID", referencedColumnName = "toothLabelID")
     @Basic(optional = false)
     private ToothLabel toothLabel;
     
     /**
      * Koreni zuba.
      */
-    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tooth",fetch = FetchType.LAZY,orphanRemoval = true)
     @Basic(optional = false)
     private List<ToothRoot> toothRoots;
-    
     /**
      * Strane zuba.
      */
-    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tooth",fetch = FetchType.LAZY,orphanRemoval = true)
     @Basic(optional = false)
     private List<ToothSide> toothSides;
     
     /**
      * Intervencije na zubu.
      */
-    @OneToMany(mappedBy = "tooth",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tooth",fetch = FetchType.LAZY)
     @Basic(optional = false)
     private List<ToothIntervention> toothInterventions;
     
@@ -216,4 +217,5 @@ public class Tooth implements Serializable{
     public String toString() {
         return "Tooth{" + "toothID=" + toothID + ", patient=" + patient + ", label=" + toothLabel + '}';
     }
+
 }

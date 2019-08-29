@@ -5,6 +5,11 @@ import com.miromaric.dentalassistant.dao.impl.AppointmentDaoImpl;
 import com.miromaric.dentalassistant.exception.ResourceNotFoundException;
 import com.miromaric.dentalassistant.model.Appointment;
 import com.miromaric.dentalassistant.service.AppointmentService;
+import com.miromaric.dentalassistant.service.impl.filter.appointments.DentistAppointmentsFilter;
+import com.miromaric.dentalassistant.service.impl.filter.appointments.FromDateAppointmentsFilter;
+import com.miromaric.dentalassistant.service.impl.filter.appointments.PatientAppointmentsFilter;
+import com.miromaric.dentalassistant.service.impl.filter.appointments.ToDateAppointmentsFilter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,6 +53,14 @@ public class AppointmentServiceImpl implements AppointmentService{
         if(appointment!=null)
             return appointment;
         throw new ResourceNotFoundException("Appointment not found");
+    }
+
+    @Override
+    public List<Appointment> getFiltered(Date fromDate, Date toDate, String username, Long patientId) {
+        return (new FromDateAppointmentsFilter(fromDate,
+                new ToDateAppointmentsFilter(toDate, 
+                        new DentistAppointmentsFilter(username, 
+                                new PatientAppointmentsFilter(patientId,null))))).filter(getAll());
     }
     
 }

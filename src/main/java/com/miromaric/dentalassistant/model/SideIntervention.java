@@ -56,6 +56,20 @@ public class SideIntervention extends InterventionItem{
     }
 
     /**
+     * 
+     * @param toothSide Strana zuba na kojoj se vrši intervencija
+     * @param toothSideState Novo stanje strane zuba
+     * @param itemID Jedinstveni identifikator stavke intervencije
+     * @param intervention Intervencija
+     * @param note Opis stavke
+     */
+    public SideIntervention(ToothSide toothSide, ToothSideState toothSideState, Long itemID, Intervention intervention, String note) {
+        super(itemID, intervention, note);
+        this.toothSide = toothSide;
+        this.toothSideState = toothSideState;
+    }
+
+    /**
      * Vraća stranu zuba na kojoj se vrši intervencija.
      * @return Strana zuba na kojoj se vrši intervencija
      */

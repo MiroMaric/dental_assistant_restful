@@ -54,6 +54,13 @@ public class ToothRootLabel implements Serializable{
 
     public ToothRootLabel() {
     }
+    /**
+     * 
+     * @param toothRootLabelID Jedinstveni identifikator oznake korena
+     */
+    public ToothRootLabel(Long toothRootLabelID) {
+        this.toothRootLabelID = toothRootLabelID;
+    }
 
     /**
      * 

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -59,7 +60,7 @@ public class ToothSide implements Serializable{
     /**
      * Intervencije na strani zuba.
      */
-    @OneToMany(mappedBy = "toothSide",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toothSide",fetch = FetchType.LAZY)
     @Basic(optional = false)
     private List<SideIntervention> sideInterventions;
 

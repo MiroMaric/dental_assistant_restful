@@ -31,14 +31,14 @@ public class ToothIntervention extends InterventionItem implements Serializable{
      * Zub na kome se vrši intervencija.
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothID",referencedColumnName = "toothID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothID",referencedColumnName = "toothID")
     @Basic(optional = false)
     private Tooth tooth;
     /**
      * Novo stanje zuba.
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "toothStateID",referencedColumnName = "toothStateID",insertable = false,updatable = false)
+    @JoinColumn(name = "toothStateID",referencedColumnName = "toothStateID")
     @Basic(optional = false)
     private ToothState toothState;
 
@@ -51,6 +51,19 @@ public class ToothIntervention extends InterventionItem implements Serializable{
      * @param toothState Novo stanje zuba
      */
     public ToothIntervention(Tooth tooth, ToothState toothState) {
+        this.tooth = tooth;
+        this.toothState = toothState;
+    }
+    /**
+     * 
+     * @param tooth Zub na kome se vrši intervencija
+     * @param toothState Novo stanje zuba
+     * @param itemID Jedinstveni identifikator stavke intervencije
+     * @param intervention Intervencija
+     * @param note Opis stavke
+     */
+    public ToothIntervention(Tooth tooth, ToothState toothState, Long itemID, Intervention intervention, String note) {
+        super(itemID, intervention, note);
         this.tooth = tooth;
         this.toothState = toothState;
     }
