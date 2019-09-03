@@ -25,11 +25,13 @@
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
       <property name="javax.persistence.schema-generation.database.action" value="none"/>
-      <!--            <property name="hibernate.c3p0.min_size" value="5" />
-            <property name="hibernate.c3p0.max_size" value="20" />
-            <property name="hibernate.c3p0.timeout" value="300" />
-            <property name="hibernate.c3p0.max_statements" value="50" />
-            <property name="hibernate.c3p0.idle_test_period" value="120" />-->
+      
+<!--      <property name="hibernate.c3p0.min_size" value="4" />
+      <property name="hibernate.c3p0.max_size" value="8" />
+      <property name="hibernate.c3p0.timeout" value="300" />
+      <property name="hibernate.c3p0.max_statements" value="20" />
+      <property name="hibernate.c3p0.idle_test_period" value="3000" />-->
+      
       <property name="hibernate.show_sql" value="true"/>
     </properties>
   </persistence-unit>

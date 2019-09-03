@@ -19,52 +19,92 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
+ * Implementacija veb resursa - Doktor(korisnik sistema). Klasa koristi JAX-RS
+ * anotacije kako bi obezbedila kreiranje veb resursa.
  *
- * @author MikoPC
+ * @author Miro Marić
+ * @see User
+ * @see MyResponse
  */
 @Path("users")
 public class UserResource {
-    
-    UserService service = new UserServiceImpl();
-    
+
+    private final UserService service = new UserServiceImpl();
+
+    /**
+     * Resurs metoda koja vraća sve doktore(korisnike sistema). Obrađuje HTTP
+     * GET /users zahtev.
+     *
+     * @return Odgovor koji sadrži reprezentaciju svih doktora
+     *
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse getAll(){
-        List<User> users =  service.getAll();
+    public MyResponse getAll() {
+        List<User> users = service.getAll();
         return new MyResponse(Status.SUCCESS, users, null);
     }
-    
+
+    /**
+     * Resurs metoda koja vraća željenog doktora. Obrađuje HTTP GET
+     * /users/{username} zahtev.
+     *
+     * @param username Korisničko ime doktora(Korisnika sistema)
+     * @return Odgovor koji sadrži reprezentaciju doktora
+     */
     @GET
     @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse getOne(@PathParam("username")String username){
-        User user =  service.getOne(username);
+    public MyResponse getOne(@PathParam("username") String username) {
+        User user = service.getOne(username);
         return new MyResponse(Status.SUCCESS, user, null);
     }
 
+    /**
+     * Resurs metoda koja kreira novog doktora(korisnika sistema). Obrađuje HTTP
+     * POST /users zahtev.
+     *
+     * @param user Korisnik
+     * @return Odgovor koji sadrži reprezentaciju novog korisnika
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(@Valid User user){
+    public Response save(@Valid User user) {
         service.save(user);
         return Response.status(Response.Status.CREATED).entity(new MyResponse(Status.SUCCESS, user, null)).build();
     }
-    
+
+    /**
+     * Resurs metoda koja vrši brisanje korisnika. Obrađuje HTTP DELETE
+     * /users/{username} zahtev.
+     *
+     * @param username Korisničko ime doktora(Korisnika sistema)
+     * @return Odgovor koji sadrži reprezentaciju obrisanog korisnika
+     */
     @DELETE
     @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public MyResponse remove(@PathParam("username")String username){
+    public MyResponse remove(@PathParam("username") String username) {
         User user = service.remove(username);
         return new MyResponse(Status.SUCCESS, user, null);
     }
-    
+
+    /**
+     * Resurs metoda koja vrši izmenu korisnika. Obrađuje HTTP PUT
+     * /users/{username} zahtev.
+     *
+     * @param username Korisničko ime doktora(Korisnika sistema)
+     * @param user Korisnik
+     * @return Odgovor koji sadrži reprezentaciju izmenjenog korisnika
+     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{username}")
-    public MyResponse update(@PathParam("username")String username,@Valid User user){
-        User uUser = service.update(username,user);
+    public MyResponse update(@PathParam("username") String username, @Valid User user) {
+        User uUser = service.update(username, user);
         return new MyResponse(Status.SUCCESS, uUser, null);
     }
-    
+
 }

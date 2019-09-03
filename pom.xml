@@ -94,7 +94,7 @@
             <version>${org.hibernate.version}</version>
         </dependency>
         <!--For connection pool-->
-        <!--        <dependency>
+<!--        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
             <version>${org.hibernate.version}</version>

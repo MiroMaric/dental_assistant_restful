@@ -12,7 +12,6 @@ public class MyPersistence {
     private static MyPersistence instance;
     private final EntityManagerFactory emf;
     
-    
     private MyPersistence() {
         emf = Persistence.createEntityManagerFactory("HerokuDentalAssistantPU");
     }

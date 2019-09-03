@@ -9,6 +9,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * Klasa predstavlja korisnika restful veb servisa.
+ *
+ * @author Miro Marić
+ */
 @Entity
 @Table(name = "service_user")
 @NamedQueries({
@@ -17,32 +22,59 @@ import javax.persistence.Table;
 })
 public class WebServiceUser implements Serializable{
     
+    /**
+     * Korisničko ime korisnika restful veb servisa.
+     */
     @Id
     @Column(nullable = false)
     private String username;
+    /**
+     * Šifra korisnika restful veb servisa.
+     */
     @Column(nullable = false)
     private String password;
 
     public WebServiceUser() {
     }
 
+    /**
+     * 
+     * @param username Korisničko ime
+     * @param password Šifra korisnika
+     */
     public WebServiceUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    /**
+     * Vraća korisničko ime.
+     * @return Korisničko ime
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Postavlja korisničko ime.
+     * @param username Korisničko ime
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Vraća šifru korisnika.
+     * @return Šifra korisnika
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Postavlja šifru korisnika.
+     * @param password Šifra korisnika
+     */
     public void setPassword(String password) {
         this.password = password;
     }

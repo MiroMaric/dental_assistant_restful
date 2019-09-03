@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Klasa predstavlja koren zuba.
  *
- * @author MikoPC
+ * @author Miro Marić
+ * @see Tooth
+ * @see ToothRootLabel
+ * @see RootIntervention
+ * 
  */
 @Entity
 @Table(name = "tooth_root")
@@ -28,27 +34,47 @@ import javax.persistence.Table;
     @NamedQuery(name = "ToothRoot.getById", query = "SELECT tr FROM ToothRoot tr WHERE tr.toothRootID = :id")
 })
 public class ToothRoot implements Serializable{
+    /**
+     * Jedinstveni identifikator korena zuba.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Long toothRootID;
     
+    /**
+     * Zub pacijenta
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "toothID",referencedColumnName = "toothID")
+    @Basic(optional = false)
     private Tooth tooth;
     
+    /**
+     * Oznaka korena
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "toothRootLabelID",referencedColumnName = "toothRootLabelID")
     @Basic(optional = false)
     private ToothRootLabel rootLabel;
     
-    @OneToMany(mappedBy = "toothRoot",fetch = FetchType.EAGER)
+    /**
+     * Intervencije na korenu.
+     */
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "toothRoot",fetch = FetchType.LAZY)
     @Basic(optional = false)
     private List<RootIntervention> rootInterventions;
 
     public ToothRoot() {
     }
 
+    /**
+     * 
+     * @param toothRootID Jedinstveni identifikator korena
+     * @param tooth Zub pacijenta
+     * @param rootLabel Oznaka korena
+     * @param rootInterventions Intervencije na korenu
+     */
     public ToothRoot(Long toothRootID, Tooth tooth, ToothRootLabel rootLabel, List<RootIntervention> rootInterventions) {
         this.toothRootID = toothRootID;
         this.tooth = tooth;
@@ -56,35 +82,67 @@ public class ToothRoot implements Serializable{
         this.rootInterventions = rootInterventions;
     }
 
+    /**
+     * Vraća intervencije na korenu.
+     * @return Intervencije na korenu
+     */
     public List<RootIntervention> getRootInterventions() {
         return rootInterventions;
     }
 
+    /**
+     * Vraća oznaka korena.
+     * @return Oznaka korena
+     */
     public ToothRootLabel getRootLabel() {
         return rootLabel;
     }
 
+    /**
+     * Vraća zub pacijenta.
+     * @return Zub pacijenta.
+     */
     public Tooth getTooth() {
         return tooth;
     }
 
+    /**
+     * Vraća jedinstveni identifikator korena.
+     * @return Jedinstveni identifikator korena
+     */
     public Long getToothRootID() {
         return toothRootID;
     }
 
+    /**
+     * Postavlja intervencije na korenu.
+     * @param rootInterventions Intervencije na korenu
+     */
     public void setRootInterventions(List<RootIntervention> rootInterventions) {
         this.rootInterventions = rootInterventions;
     }
 
+    /**
+     * Postavlja oznaka korena.
+     * @param rootLabel Oznaka korena
+     */
     public void setRootLabel(ToothRootLabel rootLabel) {
         this.rootLabel = rootLabel;
     }
 
+    /**
+     * Postavlja zub pacijenta.
+     * @param tooth Zub pacijenta
+     */
     @JsonIgnore
     public void setTooth(Tooth tooth) {
         this.tooth = tooth;
     }
 
+    /**
+     * Postavlja jedinstveni identifikator korena.
+     * @param toothRootID Jedinstveni identifikator korena.
+     */
     public void setToothRootID(Long toothRootID) {
         this.toothRootID = toothRootID;
     }
