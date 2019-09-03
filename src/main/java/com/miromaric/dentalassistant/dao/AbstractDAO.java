@@ -27,8 +27,9 @@ public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<Resource
             ResourceType dbResource = findExistingResource(resource, em);
             if (dbResource == null) {
                 em.persist(resource);
-                em.getTransaction().commit();
+                //em.getTransaction().commit();
             }
+            em.getTransaction().commit();
             return dbResource == null;
         } finally {
             if (em.getTransaction().isActive()) {
@@ -74,7 +75,7 @@ public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<Resource
             if (uResource != null) {
                 setIdToResource(resource, key);
                 em.merge(resource);
-                em.getTransaction().commit();
+                //em.getTransaction().commit();
             }
             em.getTransaction().commit();
             return uResource;
@@ -94,7 +95,7 @@ public abstract class AbstractDAO<ResourceType, KeyType> implements DAO<Resource
             ResourceType resource = findResourceById(key, em);
             if (resource != null) {
                 em.remove(resource);
-                em.getTransaction().commit();
+                //em.getTransaction().commit();
             }
             em.getTransaction().commit();
             return resource;
