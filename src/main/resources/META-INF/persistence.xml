@@ -26,16 +26,16 @@
             <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <property name="javax.persistence.schema-generation.database.action" value="none"/>
       
-                  <property name="hibernate.c3p0.min_size" value="4" />
-                  <property name="hibernate.c3p0.max_size" value="8" />
-                  <property name="hibernate.c3p0.timeout" value="200" />
-                  <property name="hibernate.c3p0.max_statements" value="20" />
-                  <property name="hibernate.c3p0.idle_test_period" value="2000" />
+            <property name="hibernate.c3p0.min_size" value="4" />
+            <property name="hibernate.c3p0.max_size" value="8" />
+            <property name="hibernate.c3p0.timeout" value="200" />
+            <property name="hibernate.c3p0.max_statements" value="20" />
+            <property name="hibernate.c3p0.idle_test_period" value="2000" />
                   
                   
             <property name="hibernate.show_sql" value="true"/>
       
-            <property name="hibernate.enable_lazy_load_no_trans" value="true" />
+            <!--<property name="hibernate.enable_lazy_load_no_trans" value="true" />-->
         </properties>
     </persistence-unit>
     <!--com.miromaric_DentalAssistant-RESTfulWebService_war_1.0-SNAPSHOTPU-->
