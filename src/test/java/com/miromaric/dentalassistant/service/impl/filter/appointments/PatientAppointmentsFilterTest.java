@@ -37,9 +37,9 @@ public class PatientAppointmentsFilterTest {
         filter = new PatientAppointmentsFilter(patientId, null);
         List<Appointment> filteredAppointments = filter.filter(dummyList);
         Assert.assertEquals(3, filteredAppointments.size());
-        for (Appointment a : filteredAppointments) {
+        filteredAppointments.forEach((a) -> {
             Assert.assertTrue(a.getPatient().getPatientID().equals(patientId));
-        }
+        });
     }
 
     @Test

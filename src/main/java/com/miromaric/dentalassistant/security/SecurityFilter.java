@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.StringTokenizer;
-import javax.ws.rs.HttpMethod;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.MediaType;

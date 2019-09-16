@@ -37,9 +37,9 @@ public class DentistAppointmentsFilterTest {
         filter = new DentistAppointmentsFilter(username, null);
         List<Appointment> filteredAppointments = filter.filter(dummyList);
         Assert.assertEquals(0, filteredAppointments.size());
-        for (Appointment a : filteredAppointments) {
+        filteredAppointments.forEach((a) -> {
             Assert.assertTrue(a.getUser().getUsername().equals(username));
-        }
+        });
     }
 
     @Test
