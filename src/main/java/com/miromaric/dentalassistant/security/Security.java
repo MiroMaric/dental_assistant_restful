@@ -1,16 +1,19 @@
 package com.miromaric.dentalassistant.security;
 
+import com.miromaric.dentalassistant.model.User;
 import com.miromaric.dentalassistant.model.WebServiceUser;
-import com.miromaric.dentalassistant.service.impl.WebServiceUserServiceImpl;
+import com.miromaric.dentalassistant.service.impl.UserServiceImpl;
 import java.util.List;
 
 public class Security{
     
     private static Security instance;
-    private final List<WebServiceUser> users;
+    private final List<User> users;
     
     private Security() {
-        users = new WebServiceUserServiceImpl().getAll();
+        //users = new WebServiceUserServiceImpl().getAll();
+        users = new UserServiceImpl().getAll();
+        
     }
     
     public static Security getInstance(){
@@ -21,11 +24,7 @@ public class Security{
 
     public boolean isWebServiceUser(String username, String password) {
         WebServiceUser user = new WebServiceUser(username, password);
-        for(WebServiceUser u:users){
-            if(u.equals(user))
-                return true;
-        }
-        return false;
+        return users.stream().anyMatch((u) -> (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())));
     }
     
 }

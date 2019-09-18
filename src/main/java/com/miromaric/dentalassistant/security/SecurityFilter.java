@@ -17,6 +17,10 @@ public class SecurityFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
+        System.out.println(requestContext.getUriInfo().getPath());
+        if(requestContext.getUriInfo().getPath().equals("application.wadl") || requestContext.getUriInfo().getPath().equals("")){
+            return;
+        }
         List<String> auths = requestContext.getHeaders().get("Authorization");
         if (auths != null && auths.size() > 0) {
             String authToken = auths.get(0).split("\\s+")[1];
