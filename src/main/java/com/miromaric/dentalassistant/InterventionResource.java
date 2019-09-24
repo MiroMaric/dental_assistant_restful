@@ -77,15 +77,17 @@ public class InterventionResource {
      * Resurs metoda koja kreira novu intervenciju. Obrađuje HTTP POST
      * /interventions zahtev.
      *
-     * @param interventionDto intervencija(DTO)
+     * @param intervention intervencija
      * @return Odgovor koji sadrži reprezentaciju nove intervencije
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(@Valid InterventionDto interventionDto) {
-        service.save(new InterventionMapperImpl().toDataModel(interventionDto));
-        return Response.status(Response.Status.CREATED).entity(new MyResponse(Status.SUCCESS, interventionDto, null)).build();
+    public Response save(Intervention intervention) {
+        System.out.println("==================================");
+        System.out.println(intervention.getUser().getUsername());
+        service.save(intervention);
+        return Response.status(Response.Status.CREATED).entity(new MyResponse(Status.SUCCESS, intervention, null)).build();
     }
 
     /**
