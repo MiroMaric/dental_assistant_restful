@@ -106,7 +106,7 @@ public class Patient implements Serializable {
     /**
      * Zubi pacijenta
      */
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient",fetch = FetchType.LAZY)
     @JsonView(JsonViews.Deep.class)
     private List<Tooth> teeth;
 
